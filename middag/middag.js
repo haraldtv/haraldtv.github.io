@@ -1,8 +1,6 @@
-generateDinner();
-
-console.log("Test");
+console.log("Test external");
 fetch("dinners.json").then(response => {
-    console.log(response);
+    console.log(response.name);
 })
 
 async function generateDinner() {
