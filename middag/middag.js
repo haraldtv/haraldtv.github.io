@@ -27,4 +27,3 @@ let dinners = {
 function generateDinners() {
     console.log(dinners.dishes[0].dish);
 }
-
