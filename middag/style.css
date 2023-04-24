@@ -37,6 +37,7 @@ body {
 .Table {
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 30%;
 }
 
 .dinnertable {
@@ -45,10 +46,37 @@ body {
     border: 1px solid;
     width: 100%;
 }
-tr th {
+
+.visibility {
+    margin-bottom: 30%;
+}
+
+.handleTable {
+    margin-top: 30%;
+}
+
+/*
+tr:nth-child(even) {
+    background-color: rgba(40, 85, 85, 0.4);
+}
+
+th:nth-child(even),
+td:nth-child(even) {
+    background-color: rgba(60, 70, 163, 0.4);
+}
+*/
+
+tr {
     border: 1px solid;
+}
+th {
+    border: 2px solid;
 }
 
 .a {
     color: white;
+}
+
+.brow {
+    border: 1px solid;
 }

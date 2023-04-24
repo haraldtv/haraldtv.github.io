@@ -7,7 +7,7 @@ let dinners = {
         "ingredients": [
             "tunfisk",
             "fullkornpasta",
-            "creme fraiche"     
+            "creme fraiche"
         ]
     },
     {
@@ -30,7 +30,18 @@ let dinners = {
             "ris"
         ],
     }
-]
+    ],
+    "prices_total": [{
+        "brokkoli": 42,
+        "creme fraiche": 25,
+        "egg": 42,
+        "kyllinglår": 106,
+        "kjøttdeig": 67,
+        "pasta": 28,
+        "ris": 38,
+        "tunfisk": 24,
+    }]
+
 }
 
 document.getElementById("visibility").style.display = "none";
