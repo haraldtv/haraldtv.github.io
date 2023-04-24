@@ -2,7 +2,7 @@ generateDinner();
 
 
 async function generateDinner() {
-    fetch(dinners.json)
+    fetch("dinners.json")
 
     const response = await fetch(haraldtv.github.io/middag/dinners.json);
     const dinners = await response.json;
