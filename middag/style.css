@@ -1,0 +1,15 @@
+.title {
+    color: rgb(214, 185, 253);
+    text-align: center;
+    padding: 10px;
+}
+
+.intro {
+    color: rgb(214, 185, 253);
+    margin: auto;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(26, 22, 36);
+}
