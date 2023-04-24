@@ -29,36 +29,66 @@ let dinners = {
             "brokkoli",
             "ris"
         ],
+    },
+    {
+        "id": 4,
+        "dish": "Biffstrimler m/ ris",
+        "price": [1, 2],
+        "ingredients": [
+            "biffstrimler",
+            "ris",
+            "løk"
+        ],
     }
     ],
     "prices_total": [{
         "brokkoli": 42,
+        "biffstrimler": 999,
         "creme fraiche": 25,
         "egg": 42,
         "kyllinglår": 106,
         "kjøttdeig": 67,
+        "løk": 999,
         "pasta": 28,
         "ris": 38,
         "tunfisk": 24,
+    }],
+    "ingredients_size": [{
+        "brokkoli": 3,
+        "biffstrimler": 1,
+        "creme fraiche": 3,
+        "egg": 2,
+        "kyllinglår": 3,
+        "kjøttdeig": 1,
+        "løk": 2,
+        "pasta": 3,
+        "ris": 5,
+        "tunfisk": 1,
     }]
 
 }
 
+const dinnerN = 4;
+
 document.getElementById("visibility").style.display = "none";
+document.getElementById("handleliste").style.display = "none";
+
 console.log("DinnerTime!");
 console.log(dinners.dishes[2].ingredients[0]);
 
+//Randomly generates a number that is used to assign a dinner to each day
 function generateDinners() {
     let a = Math.random()
     let dinnerlist = [0, 0, 0, 0, 0, 0, 0]
     for (let i = 0; i < 7; i++) {
         if (dinnerlist[i] == 0) {
-            dinnerlist[i] = Math.round(100 * Math.random() % 2) + 1;
+            dinnerlist[i] = Math.round(100 * Math.random() % (dinnerN-1)) + 1;
         }
     }
     console.log(dinnerlist)
 
     document.getElementById("visibility").style.display = "block";
+    document.getElementById("handleliste").style.display = "block";
 
     fillTable(dinnerlist);
 }
@@ -81,6 +111,10 @@ function fillTable(dinnerlist) {
     document.getElementById("b7").innerHTML = fillIngredients(6, dinnerlist);
 
     //fillIngredients(0, dinnerlist);
+
+    printShoppingList(shoppingList(dinnerlist));
+
+
 }
 
 function fillIngredients(tablepos, dinnerlist) {
@@ -90,6 +124,36 @@ function fillIngredients(tablepos, dinnerlist) {
     }
     console.log(ingredients);
     return ingredients;
+}
+
+function shoppingList(dinnerlist) {
+    let ingredientlist = [];
+    for (let i = 0; i < dinnerlist.length; i++) {
+            if (!ingredientlist.includes(dinnerlist[i])) {
+                ingredientlist.push(dinnerlist[i]);
+            }
+    }
+    console.log(ingredientlist);
+}
+
+function shoppingListDumb(dinnerlist) {
+    let ingredientlist = [];
+    for (let i = 0; i < dinnerlist.length; i++) {
+        if (!ingredientlist.includes(dinnerlist[i])) {
+            ingredientlist.push(dinnerlist[i]);
+        }
+    }
+    return ingredientlist;
+}
+
+function printShoppingList(ingredientlist) {
+    console.log("Running printShoppingList");
+    //var table = getElementById("handleTable");
+    var row = table.insertRow(1);
+    for(let i = 0; i < ingredientlist.length; i++) {
+        var cell = row.insertCell(i);
+        cell.innerHTML=ingredientlist[i];
+    }
 }
 
 function genNum(dinnerlist) {

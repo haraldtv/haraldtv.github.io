@@ -53,6 +53,16 @@ body {
 
 .handleTable {
     margin-top: 30%;
+    margin-left: 30%;
+    text-align: center;
+    border: 1px solid;
+    
+}
+
+.handleListe {
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 150%;
 }
 
 /*
@@ -66,11 +76,8 @@ td:nth-child(even) {
 }
 */
 
-tr {
+table, th, td {
     border: 1px solid;
-}
-th {
-    border: 2px solid;
 }
 
 .a {
