@@ -23,7 +23,15 @@ let dinners = {
 ]
 }
 
+generateDinners();
 
 function generateDinners() {
-    console.log(dinners.dishes[0].dish);
+    let a = Math.random()
+    let dinnerlist = [0, 0, 0, 0, 0, 0, 0]
+    for (let i = 0; i < 7; i++) {
+        if (dinnerlist[i] == 0) {
+            dinnerlist[i] = Math.round(100 * Math.random() % 2) + 1;
+        }
+    }
+    console.log(dinnerlist)
 }
