@@ -14,8 +14,15 @@
     </div>
 
     <div id="dinnerlist">
-        
+        <script>
+            console.log("Test");
+            fetch("dinners.json").then(response => {
+                console.log(response);
+            }) 
+        </script>
     </div>
+
+    
 
 </body>
 </html>
