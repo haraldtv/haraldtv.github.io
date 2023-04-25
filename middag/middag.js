@@ -39,36 +39,78 @@ let dinners = {
             "ris",
             "løk"
         ],
+    },
+    {
+        "id": 5,
+        "dish": "Pokebowl",
+        "price": [1, 2],
+        "ingredients": [
+            "laks",
+            "ris",
+            "syltet løk",
+            "brokkoli",
+            "sukkererter"
+        ],
+    },
+    {
+        "id": 6,
+        "dish": "Stekt laks og ris",
+        "price": [1, 2],
+        "ingredients": [
+            "laks",
+            "ris",
+            "brokkoli"
+        ],
+    },
+    {
+        "id": 7,
+        "dish": "Kylling og frites",
+        "price": [1, 2],
+        "ingredients": [
+            "kyllingfillet",
+            "pommes frites",
+            "løk"
+        ],
     }
     ],
-    "prices_total": [{
+    "prices_total": {
         "brokkoli": 42,
-        "biffstrimler": 999,
+        "biffstrimler": 75,
         "creme fraiche": 25,
         "egg": 42,
+        "kyllingfillet": 65,
         "kyllinglår": 106,
         "kjøttdeig": 67,
-        "løk": 999,
-        "pasta": 28,
+        "laks": 105,
+        "løk": 10,
+        "fullkornpasta": 28,
+        "pommes frites": 40,
         "ris": 38,
+        "sukkererter": 45,
+        "syltet løk": 10,
         "tunfisk": 24,
-    }],
-    "ingredients_size": [{
+},
+    "ingredients_size": {
         "brokkoli": 3,
         "biffstrimler": 1,
         "creme fraiche": 3,
         "egg": 2,
+        "kyllingfillet": 2,
         "kyllinglår": 3,
         "kjøttdeig": 1,
+        "laks": 2,
         "løk": 2,
-        "pasta": 3,
+        "fullkornpasta": 3,
+        "pommes frites": 2,
         "ris": 5,
+        "sukkererter": 2,
+        "syltet løk": 1,
         "tunfisk": 1,
-    }]
+    }
 
 }
 
-const dinnerN = 4;
+const dinnerN = 7;
 
 document.getElementById("visibility").style.display = "none";
 document.getElementById("handleliste").style.display = "none";
@@ -76,13 +118,59 @@ document.getElementById("handleliste").style.display = "none";
 console.log("DinnerTime!");
 console.log(dinners.dishes[2].ingredients[0]);
 
+var generated = false;
+
 //Randomly generates a number that is used to assign a dinner to each day
 function generateDinners() {
+    if (generated == true) {
+        return;
+    }
     let a = Math.random()
     let dinnerlist = [0, 0, 0, 0, 0, 0, 0]
     for (let i = 0; i < 7; i++) {
         if (dinnerlist[i] == 0) {
             dinnerlist[i] = Math.round(100 * Math.random() % (dinnerN-1)) + 1;
+            b = Math.random();
+            if (i == 7) {
+                dinnerlist[i+1] = dinnerlist[i];
+            }
+            else{
+            if (i==6) {
+                if (b<0.1) {
+                    dinnerlist[i+1] == dinnerlist[i];
+                }
+            }
+            if (i==5) {
+                if (b<0.2) {
+                    dinnerlist[i+1] == dinnerlist[i];
+                }
+                else if (b<0.5) {
+                    dinnerlist[i+2] == dinnerlist[i];
+                }
+            }
+            if (i<5) {
+                if (b<0.2) {
+                    dinnerlist[i+3] = dinnerlist[i];
+                }
+                else if(b<0.6) {
+                    dinnerlist[i+2] = dinnerlist[i];
+                }
+                else if(b<0.8) {
+                    dinnerlist[i+1] = dinnerlist[i];
+                }
+            }
+            else if (i<4) {
+                if (b<0.2) {
+                    dinnerlist[i+3] = dinnerlist[i];
+                }
+                else if(b<0.6) {
+                    dinnerlist[i+2] = dinnerlist[i];
+                }
+                else if(b<0.8) {
+                    dinnerlist[i+1] = dinnerlist[i];
+                }
+            }
+        }
         }
     }
     console.log(dinnerlist)
@@ -91,6 +179,7 @@ function generateDinners() {
     document.getElementById("handleliste").style.display = "block";
 
     fillTable(dinnerlist);
+    generated = true;
 }
 
 function fillTable(dinnerlist) {
@@ -112,7 +201,7 @@ function fillTable(dinnerlist) {
 
     //fillIngredients(0, dinnerlist);
 
-    printShoppingList(shoppingList(dinnerlist));
+    printShoppingList(shoppingListAlt(dinnerlist));
 
 
 }
@@ -120,10 +209,18 @@ function fillTable(dinnerlist) {
 function fillIngredients(tablepos, dinnerlist) {
     let ingredients = "";
     for (let i = 0; i < (dinners.dishes[dinnerlist[tablepos] - 1].ingredients).length; i++) {
-        ingredients += (" " + (dinners.dishes[dinnerlist[tablepos] - 1].ingredients[i]) + "<br>");
+        ingredients += ((dinners.dishes[dinnerlist[tablepos] - 1].ingredients[i]) + "<br>");
     }
     console.log(ingredients);
     return ingredients;
+}
+
+function finnIndividuellIngrediens(tablepos, dinnerlist, totalIngredients) {
+    let ingredients = [];
+    for (let i = 0; i < (dinners.dishes[dinnerlist[tablepos] - 1].ingredients).length; i++) {
+        totalIngredients.push((dinners.dishes[dinnerlist[tablepos] - 1].ingredients[i]));
+    }
+    console.log(ingredients);
 }
 
 function shoppingList(dinnerlist) {
@@ -134,28 +231,55 @@ function shoppingList(dinnerlist) {
             }
     }
     console.log(ingredientlist);
-}
-
-function shoppingListDumb(dinnerlist) {
-    let ingredientlist = [];
-    for (let i = 0; i < dinnerlist.length; i++) {
-        if (!ingredientlist.includes(dinnerlist[i])) {
-            ingredientlist.push(dinnerlist[i]);
-        }
-    }
     return ingredientlist;
 }
 
-function printShoppingList(ingredientlist) {
-    console.log("Running printShoppingList");
-    //var table = getElementById("handleTable");
-    var row = table.insertRow(1);
-    for(let i = 0; i < ingredientlist.length; i++) {
-        var cell = row.insertCell(i);
-        cell.innerHTML=ingredientlist[i];
+function shoppingListAlt(dinnerlist) {
+    let totalIngredients = [];
+    for (let i = 0; i < 7; i++) {
+        finnIndividuellIngrediens(i, dinnerlist, totalIngredients);
+        //console.log(totalIngredients);
     }
+    return totalIngredients;
+}
+
+function getIngredientPrice(ingredient_name) {
+    console.log(ingredient_name);
+    console.log(dinners.prices_total[ingredient_name]);
+    return dinners.prices_total[ingredient_name];
+}
+
+function printShoppingList(ingredientlist) {
+    console.log(ingredientlist);
+    console.log(ingredientlist.length);
+    let totalstk = 0;
+    let totalprs = 0;
+    var table = document.getElementById("handleTable");
+    for(let i = 0; i < ingredientlist.length; i++) {
+        var row = table.insertRow(i+1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML=ingredientlist[i];
+        cell2.innerHTML=getIngredientPrice(ingredientlist[i]);
+        totalstk += getIngredientPrice(ingredientlist[i]);
+        cell3.innerHTML=( (getIngredientPrice(ingredientlist[i])) /  dinners.ingredients_size[ingredientlist[i]] );
+        totalprs += ( (getIngredientPrice(ingredientlist[i])) /  dinners.ingredients_size[ingredientlist[i]] );
+    }
+
+    var row = table.insertRow(ingredientlist.length+1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML="<i>Total</i>";
+    cell2.innerHTML=totalstk;
+    cell3.innerHTML=totalprs;
 }
 
 function genNum(dinnerlist) {
     let a = Math.round(100 * Math.random() % 2) + 1;
+}
+
+function rand(min, max) {
+
 }

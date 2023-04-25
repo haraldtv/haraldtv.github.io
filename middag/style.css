@@ -23,7 +23,8 @@ body {
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    cursor: pointer;
+    /*cursor: pointer;*/
+    cursor: progress;
     margin-left: 45%;
     margin-right: 40%;
     margin-top: 3%;
@@ -37,7 +38,7 @@ body {
 .Table {
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 30%;
+    margin-bottom: 10%;
 }
 
 .dinnertable {
@@ -48,20 +49,20 @@ body {
 }
 
 .visibility {
-    margin-bottom: 30%;
+    margin-bottom: 10%;
 }
 
-.handleTable {
-    margin-top: 30%;
-    margin-left: 30%;
+.handletable {
+    color: rgb(122, 111, 137);
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
     text-align: center;
     border: 1px solid;
     
 }
 
 .handleListe {
-    margin-left: 15%;
-    margin-right: 15%;
     font-size: 150%;
 }
 
