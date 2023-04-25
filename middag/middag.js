@@ -17,7 +17,8 @@ let dinners = {
         "ingredients": [
             "kjøttdeig",
             "egg",
-            "ris"
+            "ris", 
+            "vårløk"
         ]
     },
     {
@@ -89,6 +90,7 @@ let dinners = {
         "sukkererter": 45,
         "syltet løk": 10,
         "tunfisk": 24,
+        "vårløk": 25
 },
     "ingredients_size": {
         "brokkoli": 3,
@@ -106,6 +108,7 @@ let dinners = {
         "sukkererter": 2,
         "syltet løk": 1,
         "tunfisk": 1,
+        "vårløk": 2
     }
 
 }
@@ -129,7 +132,10 @@ function generateDinners() {
     let dinnerlist = [0, 0, 0, 0, 0, 0, 0]
     for (let i = 0; i < 7; i++) {
         if (dinnerlist[i] == 0) {
-            dinnerlist[i] = Math.round(100 * Math.random() % (dinnerN-1)) + 1;
+            newDinner =  Math.round(100 * Math.random() % (dinnerN-1)) + 1;
+
+            checkIfDinnerPrev(dinnerlist, formulas(1), i);
+            
             b = Math.random();
             if (i == 7) {
                 dinnerlist[i+1] = dinnerlist[i];
@@ -180,6 +186,15 @@ function generateDinners() {
 
     fillTable(dinnerlist);
     generated = true;
+}
+
+function checkIfDinnerPrev(dinnerlist, newDinner, i) {
+    if ( !(dinnerlist.includes(newDinner)) ){
+        dinnerlist[i] = newDinner;
+    }
+    else {
+        checkIfDinnerPrev(dinnerlist, formulas(1), i);
+    }
 }
 
 function fillTable(dinnerlist) {
@@ -280,6 +295,9 @@ function genNum(dinnerlist) {
     let a = Math.round(100 * Math.random() % 2) + 1;
 }
 
-function rand(min, max) {
-
+function formulas(id) {
+    if (id == 1) {
+        console.log(Math.round(100 * Math.random() % (dinnerN-1)) + 1);
+        return (Math.round(100 * Math.random() % (dinnerN-1)) + 1);   
+    }
 }
