@@ -119,7 +119,6 @@ document.getElementById("visibility").style.display = "none";
 document.getElementById("handleliste").style.display = "none";
 
 console.log("DinnerTime!");
-console.log(dinners.dishes[2].ingredients[0]);
 
 var generated = false;
 
@@ -179,7 +178,6 @@ function generateDinners() {
         }
         }
     }
-    console.log(dinnerlist)
 
     document.getElementById("visibility").style.display = "block";
     document.getElementById("handleliste").style.display = "block";
@@ -226,7 +224,6 @@ function fillIngredients(tablepos, dinnerlist) {
     for (let i = 0; i < (dinners.dishes[dinnerlist[tablepos] - 1].ingredients).length; i++) {
         ingredients += ((dinners.dishes[dinnerlist[tablepos] - 1].ingredients[i]) + "<br>");
     }
-    console.log(ingredients);
     return ingredients;
 }
 
@@ -235,7 +232,6 @@ function finnIndividuellIngrediens(tablepos, dinnerlist, totalIngredients) {
     for (let i = 0; i < (dinners.dishes[dinnerlist[tablepos] - 1].ingredients).length; i++) {
         totalIngredients.push((dinners.dishes[dinnerlist[tablepos] - 1].ingredients[i]));
     }
-    console.log(ingredients);
 }
 
 function shoppingList(dinnerlist) {
@@ -245,7 +241,6 @@ function shoppingList(dinnerlist) {
                 ingredientlist.push(dinnerlist[i]);
             }
     }
-    console.log(ingredientlist);
     return ingredientlist;
 }
 
@@ -253,20 +248,15 @@ function shoppingListAlt(dinnerlist) {
     let totalIngredients = [];
     for (let i = 0; i < 7; i++) {
         finnIndividuellIngrediens(i, dinnerlist, totalIngredients);
-        //console.log(totalIngredients);
     }
     return totalIngredients;
 }
 
 function getIngredientPrice(ingredient_name) {
-    console.log(ingredient_name);
-    console.log(dinners.prices_total[ingredient_name]);
     return dinners.prices_total[ingredient_name];
 }
 
 function printShoppingList(ingredientlist) {
-    console.log(ingredientlist);
-    console.log(ingredientlist.length);
     cleanIngredientList(ingredientlist);
     let totalstk = 0;
     let totalprs = 0;
@@ -276,11 +266,13 @@ function printShoppingList(ingredientlist) {
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
         cell1.innerHTML=ingredientlist[i];
         cell2.innerHTML=getIngredientPrice(ingredientlist[i]);
         totalstk += getIngredientPrice(ingredientlist[i]);
         cell3.innerHTML=( (getIngredientPrice(ingredientlist[i])) /  dinners.ingredients_size[ingredientlist[i]] );
         totalprs += ( (getIngredientPrice(ingredientlist[i])) /  dinners.ingredients_size[ingredientlist[i]] );
+        cell4.innerHTML = dinners.ingredients_size[ingredientlist[i]];
     }
 
     var row = table.insertRow(ingredientlist.length+1);
@@ -296,23 +288,29 @@ function cleanIngredientList(ingredientlist) {
     let returnList = [];
     for (let i = 0; i< ingredientlist.length; i++) {
         if (ingredientlist.includes(ingredientlist[i], i+1)) {
+            console.log("cleanIngredient:");
+            console.log(ingredientlist[i]);
+            console.log(ingredientlist.includes(ingredientlist[i]));
             let n = 0;
             let indexVal = [];
+            ingredient = ingredientlist[i];
             for (let j = 0; j<(ingredientlist.length)-i; j++) {
                 if (ingredientlist[j + i] == ingredientlist[i]) {
                     n++;
                     indexVal.push(i+j);
                 }
             }
-            ifSplice(n, indexVal, ingredientlist);
+            ifSplice(n, indexVal, ingredientlist, ingredient);
         }
     }
 }
 
-function ifSplice(n, indexVal, ingredientlist) {
+function ifSplice(n, indexVal, ingredientlist, ingredient) {
+    console.log("ifSplice");
     let i = 0;
-    while ((n+1) > dinners.ingredients_size[ingredientlist[indexVal]]) {
-        ingredientlist.splice(ingredientlist[indexVal[i]]);
+    while ((n * dinners.ingredients_size[ingredientlist[ingredient]]) >= n) {
+        console.log("Removing item!!");
+        ingredientlist.splice(ingredientlist[indexVal[i]], 1);
         i++;
     }
 }
@@ -323,7 +321,6 @@ function genNum(dinnerlist) {
 
 function formulas(id) {
     if (id == 1) {
-        console.log(Math.round(100 * Math.random() % (dinnerN-1)) + 1);
         return (Math.round(100 * Math.random() % (dinnerN-1)) + 1);   
     }
 }
