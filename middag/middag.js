@@ -267,6 +267,7 @@ function getIngredientPrice(ingredient_name) {
 function printShoppingList(ingredientlist) {
     console.log(ingredientlist);
     console.log(ingredientlist.length);
+    cleanIngredientList(ingredientlist);
     let totalstk = 0;
     let totalprs = 0;
     var table = document.getElementById("handleTable");
@@ -303,7 +304,16 @@ function cleanIngredientList(ingredientlist) {
                     indexVal.push(i+j);
                 }
             }
+            ifSplice(n, indexVal, ingredientlist);
         }
+    }
+}
+
+function ifSplice(n, indexVal, ingredientlist) {
+    let i = 0;
+    while ((n+1) > dinners.ingredients_size[ingredientlist[indexVal]]) {
+        ingredientlist.splice(ingredientlist[indexVal[i]]);
+        i++;
     }
 }
 
