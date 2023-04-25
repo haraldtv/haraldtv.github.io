@@ -286,7 +286,11 @@ function printShoppingList(ingredientlist) {
 
 function cleanIngredientList(ingredientlist) {
     let returnList = [];
-    for (let i = 0; i< ingredientlist.length; i++) {
+    let lenPar = ingredientlist.length;
+
+    for (let i = 0; i < lenPar-1; i++) {
+        console.log("-----");
+        console.log(ingredientlist[i]);
         if (ingredientlist.includes(ingredientlist[i], i+1)) {
             console.log("cleanIngredient:");
             console.log(ingredientlist[i]);
@@ -301,17 +305,24 @@ function cleanIngredientList(ingredientlist) {
                 }
             }
             ifSplice(n, indexVal, ingredientlist, ingredient);
+
+            console.log("----");
+
         }
     }
 }
 
 function ifSplice(n, indexVal, ingredientlist, ingredient) {
-    console.log("ifSplice");
-    let i = 0;
-    while ((n * dinners.ingredients_size[ingredientlist[ingredient]]) >= n) {
-        console.log("Removing item!!");
-        ingredientlist.splice(ingredientlist[indexVal[i]], 1);
-        i++;
+    console.log("ifSplice: n = ", n);
+
+    while ( (n != 1) && (n >= Math.ceil((n / dinners.ingredients_size[ingredient])))) {
+        console.log("Get spliced");
+        
+        for (let i = 0; i< indexVal.length; i++) {
+            ingredientlist.splice(indexVal[i]-i, 1);
+        }
+
+        n--;
     }
 }
 
