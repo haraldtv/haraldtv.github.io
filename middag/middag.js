@@ -291,6 +291,22 @@ function printShoppingList(ingredientlist) {
     cell3.innerHTML=totalprs;
 }
 
+function cleanIngredientList(ingredientlist) {
+    let returnList = [];
+    for (let i = 0; i< ingredientlist.length; i++) {
+        if (ingredientlist.includes(ingredientlist[i], i+1)) {
+            let n = 0;
+            let indexVal = [];
+            for (let j = 0; j<(ingredientlist.length)-i; j++) {
+                if (ingredientlist[j + i] == ingredientlist[i]) {
+                    n++;
+                    indexVal.push(i+j);
+                }
+            }
+        }
+    }
+}
+
 function genNum(dinnerlist) {
     let a = Math.round(100 * Math.random() % 2) + 1;
 }
