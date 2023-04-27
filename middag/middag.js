@@ -257,6 +257,7 @@ function getIngredientPrice(ingredient_name) {
 }
 
 function printShoppingList(ingredientlist) {
+    console.log(ingredientlist);
     cleanIngredientList(ingredientlist);
     let totalstk = 0;
     let totalprs = 0;
@@ -285,6 +286,8 @@ function printShoppingList(ingredientlist) {
 }
 
 function cleanIngredientList(ingredientlist) {
+    console.log(ingredientlist);
+
     let returnList = [];
     let lenPar = ingredientlist.length;
 
@@ -298,12 +301,14 @@ function cleanIngredientList(ingredientlist) {
             let n = 0;
             let indexVal = [];
             ingredient = ingredientlist[i];
-            for (let j = 0; j<(ingredientlist.length)-i; j++) {
+            for (let j = 0; j<(ingredientlist.length); j++) {
                 if (ingredientlist[j + i] == ingredientlist[i]) {
                     n++;
                     indexVal.push(i+j);
                 }
             }
+            console.log(indexVal);
+
             ifSplice(n, indexVal, ingredientlist, ingredient);
 
             console.log("----");
@@ -319,7 +324,7 @@ function ifSplice(n, indexVal, ingredientlist, ingredient) {
         console.log("Get spliced");
         
         for (let i = 0; i< indexVal.length; i++) {
-            ingredientlist.splice(indexVal[i]-i, 1);
+            ingredientlist.splice(indexVal[i], 1);
         }
 
         n--;
