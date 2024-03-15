@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Hello World!</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Harald Tverdal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
-<body>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="https://tverdal.com">
+              Home
+            </a>
+      
+            <a class="navbar-item" href="https://github.com/haraldtv">
+              Github
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  Projects
+                </a>
+                <a class="navbar-item" href="./Apps/apps.html">
+                  Apps
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="mailto:contact@tverdal.com">
+                  E-mail me
+                </a>
+              </div>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Admin</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-<p> Hello World! on custom domain :D</p>
 
-</body>
+  <section class="section">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Hello World!
+      </h1>
+      <p class="subtitle">
+        
+      </p>
+    </div>
+  </section>
+
+  <div class="columns">
+    <div class="column is-half is-centered is-offset-one-quarter">
+        <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-96x96">
+                    <img src="./profile_pic.png" alt="Placeholder image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">Harald Tverdal</p>
+                  <p class="subtitle is-6">contact@tverdal.com</p>
+                </div>
+              </div>
+          
+              <div class="content">
+                I'm an electrical / electronic engineering student in the last year of my bachelors degree. I have an interest in electronics and embedded programming, as well as some higher level software design.
+                <br>
+                Last updated - <time datetime="2024-2-6">6 Feb 2024</time>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  </body>
 </html>
