@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html style="overflow-x: hidden;">
+<html data-theme="light" style="overflow-x: hidden;">
   <head style="overflow-x: hidden;">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harald Tverdal</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -105,7 +105,50 @@
               </div>
             </div>
         </div>
+    </div>
+  </div>
+  <br>
 
+  <div class="columns">
+    <div class="column is-half is-centered is-offset-one-quarter">
+
+        <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">Christmas ornament robot</p>
+                </div>
+              </div>
+          
+              <div class="content">
+                    The christmas ornament robot was a project for the "Introduction to robotics" course at OsloMet. We used a custom trained YOLO model to recognize a christmas ornament and give an estimated shape. The data for the shape was then cleaned up with a modified version of the method of least squares, after which the distance to the camera was estimated using this shape. When an estimate for the distance was calculated, a robot arm picked the ornament down from a christmas tree.
+                    <br><br>
+                    <a class="button is-outlined is-link is-light" href="">GitHub project</a> <a class="button is-outlined is-link is-light" href="">Download report</a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="columns">
+    <div class="column is-half is-centered is-offset-one-quarter">
+
+        <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">Podcast content indexer</p>
+                </div>
+              </div>
+          
+              <div class="content">
+                    The podcast content indexer aims to transcribe and index the contents of a podcast. OpenAI whisper is used (run locally) to transcribe the audio files to a simple text format. After all of the episodes are transcribed, a custom indexer written in C++ is used to index the content for searching later. Project is currently work in progress, but functional.
+                    <br><br>
+                    <a class="button is-outlined is-link is-light" href="https://github.com/haraldtv/podcast-content-indexer">GitHub Project</a>
+              </div>
+            </div>
+        </div>
     </div>
   </div>
   <br><br>
