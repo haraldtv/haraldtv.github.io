@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html style="overflow-x: hidden;">
+<html data-theme="light" style="overflow-x: hidden;">
   <head style="overflow-x: hidden;">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harald Tverdal</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -13,8 +13,18 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
 
-// Get all "navbar-burger" elements
-const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    const navBar = document.getElementById("navbar_main");
+    const navMenu = document.getElementById("navbar_menu");
+    const burger = document.getElementById("navbar_burger");
+
+      burger.addEventListener('click', ()=> {
+        navBar.classList.toggle("is-active");
+        burger.classList.toggle("is-active");
+        navMenu.classList.toggle("is-active");
+      });
+
+
 
 // Get calculate button
 const $calculate_button = document.getElementById("calculate_button");
@@ -22,20 +32,6 @@ const $calculate_button = document.getElementById("calculate_button");
 const $cup_info = document.getElementById("cup_info");
 const $cup_modal_close = document.getElementById("cup_modal_close");
 
-// Add a click event on each of them
-$navbarBurgers.forEach( el => {
-  el.addEventListener('click', () => {
-
-    // Get the target from the "data-target" attribute
-    const target = el.dataset.target;
-    const $target = document.getElementById(target);
-
-    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    el.classList.toggle('is-active');
-    $target.classList.toggle('is-active');
-
-  });
-});
 
 // Opens the cup modal by pressing the info button
 $cup_info.addEventListener('click', () => {
@@ -46,6 +42,19 @@ $cup_info.addEventListener('click', () => {
 $cup_modal_close.addEventListener('click', () => {
     document.getElementById("cup_modal").classList.remove("is-active");
 });
+
+function interp(temp, cup) {
+    return 10 + Math.exp(-temp, Math.E);
+}
+
+function timeconvert(time) {
+    time = Math.round(time);
+    m = Math.floor(time / 60);
+    s = time % 60;
+    h = Math.floor(m / 60);
+    m = m % 60;
+    return String(h + " hours " + m + " minutes " + s +  " seconds")
+}
 
 $calculate_button.addEventListener('click', () => {
 
@@ -83,9 +92,16 @@ $calculate_button.addEventListener('click', () => {
     cup = document.getElementById("cup_select").value;
     console.log(cup);
 
+    wait_time = interp(temp,cup);
 
-    //document.getElementById("calculated_wait_time").textContent=("Wait time: " + temp + " seconds");
-    document.getElementById("calculated_wait_time").textContent=("Wait time: 20 minutes");
+    if (calc_method == "Calculated model") {
+        //document.getElementById("calculated_wait_time").textContent=("Wait time: " + temp + " seconds");
+        document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
+        console.log(wait_time);
+    }
+    else {
+        document.getElementById("calculated_wait_time").textContent=("Error!");
+    }
 
   });
 
@@ -94,17 +110,18 @@ $calculate_button.addEventListener('click', () => {
     
 </head style="overflow-x: hidden;">
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" id="navbar_main" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
       
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" id="navbar_burger" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
       
-        <div id="navBar-main" class="navbar-menu">
+        <div id="navbar_menu" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="https://tverdal.com">
               Home
@@ -120,10 +137,10 @@ $calculate_button.addEventListener('click', () => {
               </a>
       
               <div class="navbar-dropdown">
-                <a class="navbar-item" href="./projects.html">
+                <a class="navbar-item" href="https://tverdal.com/projects.html">
                   Projects
                 </a>
-                <a class="navbar-item" href="./blog.html">
+                <a class="navbar-item" href="https://tverdal.com/blog.html">
                   Blog
                 </a>
                 <hr class="navbar-divider">
@@ -239,11 +256,11 @@ $calculate_button.addEventListener('click', () => {
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">The cup selector</p>
+        <p class="modal-card-title">What's the difference between the cups</p>
         <button class="delete" aria-label="close" id="cup_modal_close"></button>
       </header>
       <section class="modal-card-body">
-        Explaining the cups
+        While gathering data for the numerical models, 4 different types of cups were used. 
       </section>
       <footer class="modal-card-foot">
         

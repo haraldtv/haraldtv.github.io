@@ -9,19 +9,36 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+  
+        const navBar = document.getElementById("navbar_main");
+        const navMenu = document.getElementById("navbar_menu");
+        const burger = document.getElementById("navbar_burger");
+  
+        burger.addEventListener('click', ()=> {
+          navBar.classList.toggle("is-active");
+          burger.classList.toggle("is-active");
+          navMenu.classList.toggle("is-active");
+        });
+  
+  });
+      </script>
 </head>
   <body style="overflow-x: hidden;">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" id="navbar_main" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
       
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" id="navbar_burger" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
       
-        <div id="navbarBasicExample" class="navbar-menu">
+        <div id="navbar_menu" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="https://tverdal.com">
               Home
@@ -37,10 +54,10 @@
               </a>
       
               <div class="navbar-dropdown">
-                <a class="navbar-item" href="./projects.html">
+                <a class="navbar-item" href="https://tverdal.com/projects.html">
                   Projects
                 </a>
-                <a class="navbar-item" href="./blog.html">
+                <a class="navbar-item" href="https://tverdal.com/blog.html">
                   Blog
                 </a>
                 <hr class="navbar-divider">
@@ -82,7 +99,7 @@
               </div>
           
               <div class="content">
-                    The coffe/tea calculator lets you calculate the wait time until your beverage reaches the desired temperature. The calculator is based both on experimental data, and on the <a href="https://tverdal.com/heat_equation.html">heat equation</a>.
+                    The coffe/tea calculator lets you calculate the wait time until your beverage reaches the desired temperature. The calculator is based both on experimental data, and an attempt is made to calculate it using a mathematical model.
                     <br><br>
                     <a class="button is-outlined is-link is-light" href="./projects/tea_calculator.html">Tea calculator</a>
               </div>
