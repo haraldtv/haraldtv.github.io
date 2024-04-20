@@ -19,6 +19,9 @@ const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.na
 // Get calculate button
 const $calculate_button = document.getElementById("calculate_button");
 
+const $cup_info = document.getElementById("cup_info");
+const $cup_modal_close = document.getElementById("cup_modal_close");
+
 // Add a click event on each of them
 $navbarBurgers.forEach( el => {
   el.addEventListener('click', () => {
@@ -32,6 +35,16 @@ $navbarBurgers.forEach( el => {
     $target.classList.toggle('is-active');
 
   });
+});
+
+// Opens the cup modal by pressing the info button
+$cup_info.addEventListener('click', () => {
+    console.log("clicked cup info");
+    document.getElementById("cup_modal").classList.add("is-active");
+});
+// Closes the cup modal
+$cup_modal_close.addEventListener('click', () => {
+    document.getElementById("cup_modal").classList.remove("is-active");
 });
 
 $calculate_button.addEventListener('click', () => {
@@ -133,8 +146,8 @@ $calculate_button.addEventListener('click', () => {
         Tea calculator
       </h1>
       <p class="subtitle">
-        The tea calculator lets you calculate the wait time for your desired temperature. The calculator is based on experimental data, and the temperature will likely vary with different cups. Please make sure your beverage is not too hot for consumption before drinking its contents.
-        <br><br>
+        The tea calculator lets you calculate the wait time for your desired temperature. 
+        <br>
         Read more about how the calculator was created  <a href="">here</a>.
       </p>
     </div>
@@ -167,7 +180,7 @@ $calculate_button.addEventListener('click', () => {
                         <div class="select">
                             <select id="method">
                             <option>Experimental data</option>
-                            <option>Calculated model</option>
+                            <option disabled>Calculated model</option>
                             </select>
                         </div>
                         </div>
@@ -189,7 +202,7 @@ $calculate_button.addEventListener('click', () => {
                     </div>
 
                     <div class="field">
-                        <label class="label">Cup</label>
+                        <label class="label"><div class="icon-text"><span>Cup</span><span class="icon has-text-info" id="cup_info"><ion-icon name="information-circle-outline"></ion-icon></span></div></label>
                         <div class="control">
                         <div class="select">
                             <select id="cup_select">
@@ -213,8 +226,27 @@ $calculate_button.addEventListener('click', () => {
               </div>
             </div>
           </div>
+
+         <br><br> <p>The calculator is based on experimental data, and the temperature will likely vary with different cups. Please make sure your beverage is not too hot for consumption before drinking its contents.</p>
     </div>
   </div>
 
+  <div class="modal" id="cup_modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">The cup selector</p>
+        <button class="delete" aria-label="close" id="cup_modal_close"></button>
+      </header>
+      <section class="modal-card-body">
+        Explaining the cups
+      </section>
+      <footer class="modal-card-foot">
+        
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   </body>
 </html>
