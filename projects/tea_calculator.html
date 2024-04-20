@@ -39,7 +39,7 @@ $calculate_button.addEventListener('click', () => {
     error_check = false;
     temp = document.getElementById("brewing_time").value;
     console.log(temp)
-    if (isNaN(temp)) {
+    if (isNaN(temp) || (temp == "")) {
         temp = document.getElementById("brewing_time_select").value;
         console.log(temp)
         switch (temp) {
