@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Harald Tverdal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+// Get all "navbar-burger" elements
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+// Get calculate button
+const $calculate_button = document.getElementById("calculate_button");
+
+// Add a click event on each of them
+$navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+
+    // Get the target from the "data-target" attribute
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle('is-active');
+    $target.classList.toggle('is-active');
+
+  });
+});
+
+$calculate_button.addEventListener('click', () => {
+
+    error_check = false;
+    temp = document.getElementById("brewing_time").value;
+    console.log(temp)
+    if (isNaN(temp)) {
+        temp = document.getElementById("brewing_time_select").value;
+        console.log(temp)
+        switch (temp) {
+            case ("White 75°"): 
+                temp = 75;
+                break;
+            case ("Mate 80°"): 
+                temp = 80;
+                break;
+            case ("Green 85°"): 
+                temp = 85;
+                break;
+            case ("Oolong 85°"): 
+                temp = 85;
+                break;
+            case ("Black 98°"): 
+                temp = 98;
+                break;
+            default:
+                temp = 123;
+                error_check = true;
+                break;
+        }
+    }
+
+    calc_method = document.getElementById("method").value;
+    console.log(calc_method);
+    cup = document.getElementById("cup_select").value;
+    console.log(cup);
+
+
+    document.getElementById("calculated_wait_time").textContent=("Wait time: " + temp + " seconds");
+
+  });
+
+});
+    </script>
+    
+</head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navBar-main" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="https://tverdal.com">
+              Home
+            </a>
+      
+            <a class="navbar-item" href="https://github.com/haraldtv">
+              Github
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="./projects.html">
+                  Projects
+                </a>
+                <a class="navbar-item" href="./blog.html">
+                  Blog
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="mailto:contact@tverdal.com">
+                  E-mail me
+                </a>
+              </div>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            
+          </div>
+        </div>
+      </nav>
+
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Tea calculator
+      </h1>
+      <p class="subtitle">
+        The tea calculator lets you calculate the wait time for your desired temperature. The calculator is based on experimental data, and the temperature will likely vary with different cups. Please make sure your beverage is not too hot for drinking before consumption.
+        <br><br>
+        Read more about how the calculator was created  <a href="">here</a>.
+      </p>
+    </div>
+  </section>
+
+  <div class="columns">
+    <div class="column is-half is-centered is-offset-one-quarter">
+        <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">Wait time calculator</p>
+                </div>
+              </div>
+          
+              <div class="content">
+                The wait time calculator takes the desired temperature as input and gives you an estimated wait time.
+                <br><br>
+                
+                    <div class="field">
+                      <label class="label">Temperature (celcius)</label>
+                      <div class="control">
+                        <input class="input" id="brewing_time" type="temperature" placeholder="E.g. 80.3" />
+                      </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Method</label>
+                        <div class="control">
+                        <div class="select">
+                            <select id="method">
+                            <option>Experimental data</option>
+                            <option>Calculated model</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Tea type</label>
+                        <div class="control">
+                        <div class="select">
+                            <select id="brewing_time_select">
+                            <option>White 75°</option>
+                            <option>Mate 80°</option>
+                            <option>Green 85°</option>
+                            <option>Oolong 85°</option>
+                            <option>Black 98°</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Cup</label>
+                        <div class="control">
+                        <div class="select">
+                            <select id="cup_select">
+                            <option>Porcelain (small)</option>
+                            <option>Porcelain (large)</option>
+                            <option>Glass</option>
+                            <option>Cardboard</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <button class="button is-primary" id="calculate_button">Calculate</button>
+                  
+              </div>
+
+
+            <div class="block">
+                <span id="calculated_wait_time">Wait time: </span>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  </body>
+</html>
