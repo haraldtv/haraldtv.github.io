@@ -43,8 +43,13 @@ $cup_modal_close.addEventListener('click', () => {
     document.getElementById("cup_modal").classList.remove("is-active");
 });
 
+function ep(input) {
+    return Math.exp(input, Math.E);
+}
+
 function interp(temp, cup) {
-    return 10 + Math.exp(-temp, Math.E);
+    x = temp;
+    return (4737 - 89.6*x + 0.423 * x**2);
 }
 
 function timeconvert(time) {
@@ -96,11 +101,13 @@ $calculate_button.addEventListener('click', () => {
 
     if (calc_method == "Calculated model") {
         //document.getElementById("calculated_wait_time").textContent=("Wait time: " + temp + " seconds");
+        wait_time = Math.round(wait_time);
         document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
         console.log(wait_time);
     }
     else {
-        document.getElementById("calculated_wait_time").textContent=("Error!");
+        wait_time = Math.round(wait_time);
+        document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
     }
 
   });
@@ -177,7 +184,7 @@ $calculate_button.addEventListener('click', () => {
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-4">Wait time calculator</p>
+                  <p class="title is-4">Tea time calculator</p>
                 </div>
               </div>
           
@@ -225,9 +232,9 @@ $calculate_button.addEventListener('click', () => {
                         <div class="select">
                             <select id="cup_select">
                             <option>Porcelain (small)</option>
-                            <option>Porcelain (large)</option>
-                            <option>Glass</option>
-                            <option>Cardboard</option>
+                            <option disabled>Porcelain (large)</option>
+                            <option disabled>Glass</option>
+                            <option disabled>Cardboard</option>
                             </select>
                         </div>
                         </div>
