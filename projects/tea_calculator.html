@@ -65,7 +65,8 @@ $about_modal_close.addEventListener('click', () => {
 // Opens the timer modal
 $start_timer.addEventListener('click', () => {
     console.log("clicked cup info");
-    window.location.href="./tea_timer.html"
+    urlWithParams = String("./tea_timer.html?cooling_time="+global_cooltime+"&brewing_time="+33);
+    window.location.href=urlWithParams;
 });
 
 function scie(input) {

@@ -14,8 +14,6 @@
       document.addEventListener('DOMContentLoaded', () => {
 
         const $start_timer = document.getElementById("start_timer");
-        $start_timer.style.visibility = "visible";
-        const $timer_modal_close = document.getElementById("timer_modal_close");
 
 
     const navBar = document.getElementById("navbar_main");
@@ -28,56 +26,17 @@
         navMenu.classList.toggle("is-active");
       });
 
-
-
-// Get calculate button
-const $calculate_button = document.getElementById("calculate_button");
-
-const $cup_info = document.getElementById("cup_info");
-const $cup_modal_close = document.getElementById("cup_modal_close");
-
-const $about_button = document.getElementById("about_button");
-const $about_modal_close = document.getElementById("about_modal_close");
+    times = getTimeFromUrl();
+    document.getElementById("cooling_time_text").textContent=("Cooling time: " + times[0]);
+    document.getElementById("brewing_time_text").textContent=("Brewing time: " + times[1]);
 
 global_cooltime = 0;
 
 
 // Closes the about modal
-$about_modal_close.addEventListener('click', () => {
-    document.getElementById("about_modal").classList.remove("is-active");
-});
-
-// Opens the timer modal
 $start_timer.addEventListener('click', () => {
-    console.log("clicked cup info");
-    document.getElementById("timer_modal").classList.add("is-active");
-    document.getElementById("cooling_time_text").textContent("Cooling time: ");
+    console.log("starting the timer")
 });
-// Closes the timer modal
-$timer_modal_close.addEventListener('click', () => {
-    document.getElementById("timer_modal").classList.remove("is-active");
-});
-
-function scie(input) {
-    return Math.exp(input, 10);
-}
-
-// Function for interpolated polynomial for converting from temperature to wait time
-// f(x) = 4737 - 89.6x + 0.423x^2
-function interp(temp, cup) {
-    x = temp;
-    switch (cup) {
-        case "Porcelain (small)":
-            return (4737 - 89.6*x + 0.423 * x**2);
-            break;
-        case "Porcelain (large)":
-            return (7283 -147*x + 0.744* x**2);
-        default:
-            return 10000;
-            break;
-    }
-    
-}
 
 function timeconvert(time) {
     time = Math.round(time);
@@ -88,64 +47,13 @@ function timeconvert(time) {
     return String(h + " hours " + m + " minutes " + s +  " seconds")
 }
 
-$calculate_button.addEventListener('click', () => {
-
-    error_check = false;
-    temp = document.getElementById("brewing_time").value;
-    console.log(temp)
-    if (isNaN(temp) || (temp == "")) {
-        temp = document.getElementById("brewing_time_select").value;
-        console.log(temp)
-        switch (temp) {
-            case ("White 75°"): 
-                temp = 75;
-                break;
-            case ("Mate 80°"): 
-                temp = 80;
-                break;
-            case ("Green 85°"): 
-                temp = 85;
-                break;
-            case ("Oolong 85°"): 
-                temp = 85;
-                break;
-            case ("Black 98°"): 
-                temp = 98;
-                break;
-            default:
-                temp = 123;
-                error_check = true;
-                break;
-        }
-    }
-
-    calc_method = document.getElementById("method").value;
-    console.log(calc_method);
-    cup = document.getElementById("cup_select").value;
-    console.log(cup);
-
-    wait_time = interp(temp,cup);
-
-    if (calc_method == "Calculated model") {
-        //document.getElementById("calculated_wait_time").textContent=("Wait time: " + temp + " seconds");
-        wait_time = Math.round(wait_time);
-        document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
-        console.log(wait_time);
-    }
-    else {
-        // Rounding to nearest whole number
-        wait_time = Math.round(wait_time);
-
-        // Using the ceil function to round to nearest 5
-        wait_time = Math.ceil(wait_time / 5) * 5;
-
-        global_cooltime = wait_time;
-
-        // Print formated wait time to screen
-        document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
-    }
-
-  });
+function getTimeFromUrl() {
+    addr = window.location.search;
+    params = new URLSearchParams(addr);
+    cool_time = params.get("cooling_time");
+    brew_time = params.get("brewing_time");
+    return [cool_time, brew_time];
+}
 
 });
     </script>
