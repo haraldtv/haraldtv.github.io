@@ -14,7 +14,7 @@
       document.addEventListener('DOMContentLoaded', () => {
 
         const $start_timer = document.getElementById("start_timer");
-        $start_timer.style.visibility = "hidden";
+        $start_timer.style.display = "none";
         const $timer_modal_close = document.getElementById("timer_modal_close");
 
 
@@ -65,7 +65,7 @@ $about_modal_close.addEventListener('click', () => {
 // Opens the timer modal
 $start_timer.addEventListener('click', () => {
     console.log("clicked cup info");
-    urlWithParams = String("./tea_timer.html?cooling_time="+global_cooltime+"&brewing_time="+33);
+    urlWithParams = String("./tea_timer.html?cooling_time="+global_cooltime+"&brewing_time="+120);
     window.location.href=urlWithParams;
 });
 
@@ -156,7 +156,7 @@ $calculate_button.addEventListener('click', () => {
         document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
     }
 
-    $start_timer.style.visibility = "visible";
+    $start_timer.style.display = "block";
 
   });
 
