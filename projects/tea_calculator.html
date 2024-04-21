@@ -2,7 +2,7 @@
 <html data-theme="light" style="overflow-x: hidden;">
   <head style="overflow-x: hidden;">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=100%, initial-scale=1">
     <title>Harald Tverdal</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -32,6 +32,9 @@ const $calculate_button = document.getElementById("calculate_button");
 const $cup_info = document.getElementById("cup_info");
 const $cup_modal_close = document.getElementById("cup_modal_close");
 
+const $about_button = document.getElementById("about_button");
+const $about_modal_close = document.getElementById("about_modal_close");
+
 
 // Opens the cup modal by pressing the info button
 $cup_info.addEventListener('click', () => {
@@ -43,13 +46,35 @@ $cup_modal_close.addEventListener('click', () => {
     document.getElementById("cup_modal").classList.remove("is-active");
 });
 
-function ep(input) {
-    return Math.exp(input, Math.E);
+// Opens the about modal by pressing the info button
+$about_button.addEventListener('click', () => {
+    console.log("clicked cup info");
+    document.getElementById("about_modal").classList.add("is-active");
+});
+// Closes the about modal
+$about_modal_close.addEventListener('click', () => {
+    document.getElementById("about_modal").classList.remove("is-active");
+});
+
+function scie(input) {
+    return Math.exp(input, 10);
 }
 
+// Function for interpolated polynomial for converting from temperature to wait time
+// f(x) = 4737 - 89.6x + 0.423x^2
 function interp(temp, cup) {
     x = temp;
-    return (4737 - 89.6*x + 0.423 * x**2);
+    switch (cup) {
+        case "Porcelain (small)":
+            return (4737 - 89.6*x + 0.423 * x**2);
+            break;
+        case "Porcelain (large)":
+            return (7283 -147*x + 0.744* x**2);
+        default:
+            return 10000;
+            break;
+    }
+    
 }
 
 function timeconvert(time) {
@@ -106,7 +131,13 @@ $calculate_button.addEventListener('click', () => {
         console.log(wait_time);
     }
     else {
+        // Rounding to nearest whole number
         wait_time = Math.round(wait_time);
+
+        // Using the ceil function to round to nearest 5
+        wait_time = Math.ceil(wait_time / 5) * 5;
+
+        // Print formated wait time to screen
         document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
     }
 
@@ -173,7 +204,7 @@ $calculate_button.addEventListener('click', () => {
       <p class="subtitle">
         The tea calculator lets you calculate the wait time for your desired temperature. 
         <br>
-        Read more about how the calculator was created  <a href="">here</a>.
+        Read more about how the calculator was created  <a id="about_button">here</a>.
       </p>
     </div>
   </section>
@@ -232,7 +263,7 @@ $calculate_button.addEventListener('click', () => {
                         <div class="select">
                             <select id="cup_select">
                             <option>Porcelain (small)</option>
-                            <option disabled>Porcelain (large)</option>
+                            <option>Porcelain (large)</option>
                             <option disabled>Glass</option>
                             <option disabled>Cardboard</option>
                             </select>
@@ -276,6 +307,30 @@ $calculate_button.addEventListener('click', () => {
                 <li>Cardboard</li>
               </ul>
             <h4>Porcelain (small)</h4>
+            <p>The small porcelain cup has a volume of aproximately 300ml.</p>
+            <h4>Porcelain (large)</h4>
+            <p>The large porcelain cup has a volume of aproximately 500ml.</p>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="about_modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">How was the calculator created?</p>
+        <button class="delete" aria-label="close" id="about_modal_close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="content">
+            <h4>Data gathering</h4>
+            <p>Data was gathered by measuring the temperature in the center of the cup at 30 second intervals. A thermometer was suspended with its tip in the approximate center of the cup using a piece of string. The measurements seem to have been a bit inaccurate for the first few measurements. This could be due to the thermometer still heating up.</p>
+            <h4>Data processing</h4>
+            <p>Polynomial regression was used to create a function giving the approximate time elapsed for an input temperature.</p>
         </div>
       </section>
       <footer class="modal-card-foot">
