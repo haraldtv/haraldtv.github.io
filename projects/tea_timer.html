@@ -14,7 +14,7 @@
       document.addEventListener('DOMContentLoaded', () => {
 
         const $start_timer = document.getElementById("start_timer");
-        $start_timer.style.visibility = "hidden";
+        $start_timer.style.visibility = "visible";
         const $timer_modal_close = document.getElementById("timer_modal_close");
 
 
@@ -42,21 +42,6 @@ const $about_modal_close = document.getElementById("about_modal_close");
 global_cooltime = 0;
 
 
-// Opens the cup modal by pressing the info button
-$cup_info.addEventListener('click', () => {
-    console.log("clicked cup info");
-    document.getElementById("cup_modal").classList.add("is-active");
-});
-// Closes the cup modal
-$cup_modal_close.addEventListener('click', () => {
-    document.getElementById("cup_modal").classList.remove("is-active");
-});
-
-// Opens the about modal by pressing the info button
-$about_button.addEventListener('click', () => {
-    console.log("clicked cup info");
-    document.getElementById("about_modal").classList.add("is-active");
-});
 // Closes the about modal
 $about_modal_close.addEventListener('click', () => {
     document.getElementById("about_modal").classList.remove("is-active");
@@ -65,7 +50,12 @@ $about_modal_close.addEventListener('click', () => {
 // Opens the timer modal
 $start_timer.addEventListener('click', () => {
     console.log("clicked cup info");
-    window.location.href="./tea_timer.html"
+    document.getElementById("timer_modal").classList.add("is-active");
+    document.getElementById("cooling_time_text").textContent("Cooling time: ");
+});
+// Closes the timer modal
+$timer_modal_close.addEventListener('click', () => {
+    document.getElementById("timer_modal").classList.remove("is-active");
 });
 
 function scie(input) {
@@ -155,8 +145,6 @@ $calculate_button.addEventListener('click', () => {
         document.getElementById("calculated_wait_time").textContent=("Wait time: " + timeconvert(wait_time));
     }
 
-    $start_timer.style.visibility = "visible";
-
   });
 
 });
@@ -215,12 +203,10 @@ $calculate_button.addEventListener('click', () => {
   <section class="section">
     <div class="container has-text-centered">
       <h1 class="title">
-        Tea calculator
+        Tea Timer!
       </h1>
       <p class="subtitle">
-        The tea calculator lets you calculate the wait time for your desired temperature. 
-        <br>
-        Read more about how the calculator was created  <a id="about_button">here</a>.
+        Tea cooling and brewing timer
       </p>
     </div>
   </section>
@@ -231,129 +217,35 @@ $calculate_button.addEventListener('click', () => {
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-4">Tea time calculator</p>
+                  <p class="title is-4">Timer</p>
                 </div>
               </div>
           
               <div class="content">
-                The wait time calculator takes the desired temperature as input and gives you an estimated wait time.
+                The blue timer (left) indicates cooling time, and the green timer (right) indicates brewing time.
                 <br><br>
                 
-                    <div class="field">
-                      <label class="label">Temperature (celcius)</label>
-                      <div class="control">
-                        <input class="input" id="brewing_time" type="temperature" placeholder="E.g. 80.3" />
-                      </div>
+                <div class="columns">
+                    <div class="column">
+                        <span id="cooling_time_text">Cooling time:</span>
+                        <br>
+                        <progress class="progress is-info" value="5" max="100" style="width:100%"></progress>
                     </div>
+                    <div class="column">
+                        <header id="brewing_time_text">Brewing time</header>
+                        <progress class="progress is-primary" value="5" max="100" style="width:100%"></progress>
+                    </div>
+                  </div>
+                  <br>
 
-                    <div class="field">
-                        <label class="label">Method</label>
-                        <div class="control">
-                        <div class="select">
-                            <select id="method">
-                            <option>Experimental data</option>
-                            <option disabled>Calculated model</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label">Tea type</label>
-                        <div class="control">
-                        <div class="select">
-                            <select id="brewing_time_select">
-                            <option>White 75°</option>
-                            <option>Mate 80°</option>
-                            <option>Green 85°</option>
-                            <option>Oolong 85°</option>
-                            <option>Black 98°</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label"><div class="icon-text"><span>Cup</span><span class="icon has-text-info" id="cup_info"><ion-icon name="information-circle-outline"></ion-icon></span></div></label>
-                        <div class="control">
-                        <div class="select">
-                            <select id="cup_select">
-                            <option>Porcelain (small)</option>
-                            <option>Porcelain (large)</option>
-                            <option disabled>Glass</option>
-                            <option disabled>Cardboard</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-                    
-                    <br>
-                    <button class="button is-outlined is-primary" id="calculate_button">Calculate</button>
+                  <button class="button is-link is-outlined" id="start_timer">
+                    <div class="icon-text"><span>Start Timer</span><span class="icon has-text-info"><ion-icon name="alarm"></ion-icon></span></div>
+                </button>
                   
               </div>
-
-
-            <div class="block">
-                <span id="calculated_wait_time">Wait time: </span>
-            </div>
-            
-
-            <button class="button is-link is-outlined" id="start_timer">
-                <div class="icon-text"><span>Open Timer</span><span class="icon has-text-info"><ion-icon name="alarm"></ion-icon></span></div>
-            </button>
             </div>
           </div>
 
-         <br><br> <p>The calculator is based on experimental data, and the temperature will likely vary with different cups. Please make sure your beverage is not too hot for consumption before drinking its contents.</p>
-    </div>
-  </div>
-
-  <div class="modal" id="cup_modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">What's the difference between the cups</p>
-        <button class="delete" aria-label="close" id="cup_modal_close"></button>
-      </header>
-      <section class="modal-card-body">
-        <div class="content">
-            <h3>In the gathering of data, 4 different cups were used</h3>
-            <ul>
-                <li>Porcelain (small)</li>
-                <li>Porcelain (large)</li>
-                <li>Glass</li>
-                <li>Cardboard</li>
-              </ul>
-            <h4>Porcelain (small)</h4>
-            <p>The small porcelain cup has a volume of aproximately 300ml.</p>
-            <h4>Porcelain (large)</h4>
-            <p>The large porcelain cup has a volume of aproximately 500ml.</p>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        
-      </footer>
-    </div>
-  </div>
-
-  <div class="modal" id="about_modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">How was the calculator created?</p>
-        <button class="delete" aria-label="close" id="about_modal_close"></button>
-      </header>
-      <section class="modal-card-body">
-        <div class="content">
-            <h4>Data gathering</h4>
-            <p>Data was gathered by measuring the temperature in the center of the cup at 30 second intervals. A thermometer was suspended with its tip in the approximate center of the cup using a piece of string. The measurements seem to have been a bit inaccurate for the first few measurements. This could be due to the thermometer still heating up.</p>
-            <h4>Data processing</h4>
-            <p>Polynomial regression was used to create a function giving the approximate wait time for an input temperature.</p>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        
-      </footer>
     </div>
   </div>
 
