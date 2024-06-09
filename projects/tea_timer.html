@@ -30,13 +30,17 @@
     document.getElementById("cooling_time_text").textContent=("Cooling time: " + times[0]);
     document.getElementById("brewing_time_text").textContent=("Brewing time: " + times[1]);
     document.getElementById("cooling_progress_bar").max = times[0];
-    document.getElementById("cooling_progress_bar").value = 37;
+    document.getElementById("cooling_progress_bar").value = 5;
 
 global_cooltime = 0;
 
 function updateTimer() {
   global_cooltime++;
+  document.getElementById("cooling_progress_bar").value = global_cooltime;
   console.log("updating timer: " + global_cooltime);
+  if (global_cooltime >= times[0]) {
+    clearTimeout(timerfunc);
+  }
 }
 
 // Closes the about modal
