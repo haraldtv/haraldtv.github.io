@@ -39,7 +39,7 @@ function updateTimer() {
 
 // Closes the about modal
 $start_timer.addEventListener('click', () => {
-    setTimeoutInterval(updateTimer, 1000);
+    timerfunc = setTimeoutInterval(updateTimer, 1000);
 });
 
 function timeconvert(time) {
