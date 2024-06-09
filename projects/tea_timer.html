@@ -32,10 +32,14 @@
 
 global_cooltime = 0;
 
+function updateTimer() {
+  global_cooltime++;
+  console.log("updating timer: " + global_cooltime);
+}
 
 // Closes the about modal
 $start_timer.addEventListener('click', () => {
-    console.log("starting the timer")
+    setTimeoutInterval(updateTimer, 1000);
 });
 
 function timeconvert(time) {
@@ -57,12 +61,12 @@ function getTimeFromUrl() {
 
 });
     </script>
-    
+
 </head style="overflow-x: hidden;">
   <body>
     <nav class="navbar" id="navbar_main" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-      
+
           <a role="button" id="navbar_burger" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -70,22 +74,22 @@ function getTimeFromUrl() {
             <span aria-hidden="true"></span>
           </a>
         </div>
-      
+
         <div id="navbar_menu" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="https://tverdal.com">
               Home
             </a>
-      
+
             <a class="navbar-item" href="https://github.com/haraldtv">
               Github
             </a>
-      
+
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 More
               </a>
-      
+
               <div class="navbar-dropdown">
                 <a class="navbar-item" href="https://tverdal.com/projects.html">
                   Projects
@@ -100,9 +104,9 @@ function getTimeFromUrl() {
               </div>
             </div>
           </div>
-      
+
           <div class="navbar-end">
-            
+
           </div>
         </div>
       </nav>
@@ -128,11 +132,11 @@ function getTimeFromUrl() {
                   <p class="title is-4">Timer</p>
                 </div>
               </div>
-          
+
               <div class="content">
                 The blue timer (left) indicates cooling time, and the green timer (right) indicates brewing time.
                 <br><br>
-                
+
                 <div class="columns">
                     <div class="column">
                         <span id="cooling_time_text">Cooling time:</span>
@@ -149,7 +153,7 @@ function getTimeFromUrl() {
                   <button class="button is-link is-outlined" id="start_timer">
                     <div class="icon-text"><span>Start Timer</span><span class="icon has-text-info"><ion-icon name="alarm"></ion-icon></span></div>
                 </button>
-                  
+
               </div>
             </div>
           </div>
