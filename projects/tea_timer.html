@@ -9,6 +9,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <!-- 
+      Sound effect from: https://pixabay.com/sound-effects/level-up-2-199574/
+      Lisence: https://pixabay.com/service/license-summary/
+    -->
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -31,14 +35,26 @@
     document.getElementById("brewing_time_text").textContent=("Brewing time: " + times[1]);
     document.getElementById("cooling_progress_bar").max = times[0];
     document.getElementById("cooling_progress_bar").value = 5;
+    document.getElementById("brewing_progress_bar").max = times[1];
+    document.getElementById("brewing_progress_bar").value = 0;
+
 
 global_cooltime = 0;
+global_brewtime = 0;
 
 function updateTimer() {
-  global_cooltime++;
-  document.getElementById("cooling_progress_bar").value = global_cooltime;
-  console.log("updating timer: " + global_cooltime);
-  if (global_cooltime >= times[0]) {
+  if (global_cooltime < times[0]) {
+    global_cooltime++;
+    document.getElementById("cooling_progress_bar").value = global_cooltime;
+    console.log("updating timer: " + global_cooltime);
+  }
+  else if(global_brewtime < times[1]) {
+    global_brewtime++;
+    document.getElementById("brewing_progress_bar").value = global_brewtime;
+  }
+  else {
+    var soundAlert = new Audio("./level-up-2-199574.mp3")
+    audio.play()
     clearTimeout(timerfunc);
   }
 }
@@ -151,7 +167,7 @@ function getTimeFromUrl() {
                     </div>
                     <div class="column">
                         <header id="brewing_time_text">Brewing time</header>
-                        <progress class="progress is-primary" value="5" max="100" style="width:100%"></progress>
+                        <progress class="progress is-primary" value="5" max="100" style="width:100%" id="brewing_progress_bar"></progress>
                     </div>
                   </div>
                   <br>
