@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html data-theme="light" style="overflow-x: hidden; scrollbar-width: none;">
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+  <head style="overflow-x: hidden;">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Podcast player</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon_io/favicon-16x16.png">
+
+    <link rel="manifest" href="./manifest.json" />
+  </head>
+  <body style="overflow-x: hidden; overflow: hidden;">
+    
+    <div class="audio-player">
+        <audio id="audio"></audio>
+        <div class="controls">
+            <div id="backward" class="svg-button">
+                <!-- Backward Icon -->
+                <img src="https://unpkg.com/ionicons@7.1.0/dist/svg/play-back-outline.svg">
+            </div>
+            <div id="play-pause" class="svg-button">
+                <!-- Play icon -->
+                <img id="play-icon" src="https://unpkg.com/ionicons@7.1.0/dist/svg/play-outline.svg">
+                <!-- Pause Icon -->
+                <img id="pause-icon" style="display: none;" src="https://unpkg.com/ionicons@7.1.0/dist/svg/pause-outline.svg">
+            </div>
+            <div id="forward" class="svg-button">
+                <!-- Forward Icon -->
+                <img src="https://unpkg.com/ionicons@7.1.0/dist/svg/play-forward-outline.svg">
+            </div>
+            <input id="progress" type="range" min="0" max="100" value="0">
+            <div id="mute-unmute" class="svg-button">
+                <!-- Volume Icon (Unmuted) -->
+                <img id="volume-icon" src="https://unpkg.com/ionicons@7.1.0/dist/svg/volume-high-outline.svg">
+                <!-- Mute Icon -->
+                <img id="mute-icon" style="display: none;" src="https://unpkg.com/ionicons@7.1.0/dist/svg/volume-mute-outline.svg">
+            </div>
+            <input id="volume" type="range" min="0" max="1" step="0.1" value="1">
+        </div>
+    </div>
+
+    <script src="player.js"></script>
+
+  </body>
+</html>
