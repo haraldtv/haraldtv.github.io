@@ -3,7 +3,7 @@
   <head style="overflow-x: hidden;">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Harald Tverdal</title>
+    <title>Podcast player</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
@@ -14,7 +14,65 @@
 
     <script type="text/javascript" src="main.js"></script>
   </head>
-  <body style="overflow-x: hidden;">
-    Hello World
+  <body style="overflow-x: hidden; overflow: hidden">
+    <div class="column"></div>
+    <div class="columns is-mobile is-centered">
+        <div class="column is-3 is-offset-1 is-centered">
+            <div class="title">Pcast</div>
+        </div>
+    </div>
+
+    <div class="column"></div>
+    <div class="columns is-mobile is-centered">
+        <div class="column is-8 is-offset-1">
+            <!--<div class="box">-->
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                      <input class="input" type="text" placeholder="Link to podcast...">
+                    </div>
+                    <div class="control">
+                      <button class="button is-info">
+                        Add
+                      </button>
+                    </div>
+                  </div>
+           <!-- </div>-->
+        </div>
+    </div>
+
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="columns is-mobile">
+            <div class="column is-10 is-centered is-offset-1">
+                
+                <button>
+                <div class="card">
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-left">
+                          <figure class="image is-96x96">
+                            <img
+                              src="https://tverdal.com/profile_pic.png"
+                              alt="Placeholder image"
+                            />
+                          </figure>
+                        </div>
+                        <div class="media-content">
+                          <p class="title is-4">Lorem ipsum dolor</p>
+                          <p class="subtitle is-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquam sapien at blandit pellentesque. Quisque eu malesuada dui, et gravida...</p>
+                        </div>
+                      </div>
+                      <div class="content">
+                        Newest episode: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                      </div>
+                    </div>
+                  </div>
+                  </button>
+
+            </div>    
+    </div>
+    
+
   </body>
 </html>
