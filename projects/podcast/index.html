@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html data-theme="light" style="overflow-x: hidden;">
+<html data-theme="light" style="overflow-x: hidden; scrollbar-width: none;">
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
   <head style="overflow-x: hidden;">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +19,7 @@
 
     <script type="text/javascript" src="main.js"></script>
   </head>
-  <body style="overflow-x: hidden; overflow: hidden">
+  <body style="overflow-x: hidden; overflow: hidden;">
     <div class="column"></div>
     <div class="columns is-mobile is-centered">
         <div class="column is-6 is-offset-3 is-centered">
@@ -42,40 +47,15 @@
 
     <div class="column"></div>
     <div class="column"></div>
-    <div class="column"></div>
-    <div class="columns is-mobile">
-            <div class="column is-10 is-centered is-offset-1">
-                
-                <button>
-                <div class="card">
-                    <div class="card-content">
-                      <div class="media">
-                        <div class="media-left">
-                          <figure class="image is-96x96">
-                            <img
-                              src="https://tverdal.com/profile_pic.png"
-                              alt="Placeholder image"
-                            />
-                          </figure>
-                        </div>
-                        <div class="media-content">
-                          <p class="title is-4">Lorem ipsum dolor</p>
-                          <p class="subtitle is-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquam sapien at blandit pellentesque. Quisque eu malesuada dui, et gravida...</p>
-                        </div>
-                      </div>
-                      <div class="content">
-                        Newest episode: <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                      </div>
-                    </div>
-                  </div>
-                  </button>
+    <div id="episodes_list">
 
-            </div>    
     </div>
+    
 
     <div class="column"></div>
     <div class="column"></div>
     
 
+    <script type="text/javascript" src="render.js"></script>
   </body>
 </html>
