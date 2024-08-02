@@ -37,5 +37,5 @@ var episodesListView = "";
 
  function goToPlayer() {
     // window.location.replace("http://127.0.0.1:5500/projects/podcast/player/player.html");
-    window.location.href = "http://127.0.0.1:5500/projects/podcast/player/player.html";
+    window.location.href = "http://tverdal.com/projects/podcast/player/player.html";
  }
