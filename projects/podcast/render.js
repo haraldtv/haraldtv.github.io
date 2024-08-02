@@ -5,7 +5,7 @@ var episodesListView = "";
     <div class="columns is-mobile">
             <div class="column is-10 is-centered is-offset-1">
                 
-                <button>
+                <button onclick="goToPlayer()");">
                 <div class="card">
                     <div class="card-content">
                       <div class="media">
@@ -34,3 +34,8 @@ var episodesListView = "";
  }
 
  document.getElementById("episodes_list").innerHTML = episodesListView;
+
+ function goToPlayer() {
+    // window.location.replace("http://127.0.0.1:5500/projects/podcast/player/player.html");
+    window.location.href = "http://127.0.0.1:5500/projects/podcast/player/player.html";
+ }
