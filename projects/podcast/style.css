@@ -1,11 +1,17 @@
 .footer-podcast {
-    position: sticky;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     padding: 2rem;
-    height: 15%;
+    height: 8%;
     background-color: rgb(243, 240, 240);
     color: rgb(0, 0, 0);
     text-align: center;
+  }
+
+  .pcast-header_ {
+    position: fixed;
+    top: 0;
+    z-index: 10;
   }

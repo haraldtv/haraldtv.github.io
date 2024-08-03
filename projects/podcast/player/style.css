@@ -8,12 +8,37 @@ body {
     background-color: #f4f4f4;
 }
 
+.episode-element {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    width: 370px;
+    top: 1rm;
+    position: relative;
+    margin-top: 10rm;
+    margin-bottom: 2%;
+    height: 10%;
+}
+.episode-list {
+    overflow: auto;
+    padding: 20px 50px 0px 30px;
+    height: 83%;
+    top: 0;
+    width: 420px;
+    position: fixed;
+}
+
 .audio-player {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 400px;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 5%;
+    z-index: 10;
+    height: 14%;
 }
 
 .controls {
