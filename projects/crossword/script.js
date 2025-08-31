@@ -151,6 +151,8 @@ class CrosswordGame {
         this.modal = new Modal();
         this.dailyBanner = document.getElementById('daily-puzzle-banner');
         this.bannerText = document.getElementById('banner-text');
+        this.currentClueDisplay = document.getElementById('current-clue');
+        this.currentClueText = document.getElementById('current-clue-text');
         
         this.init();
     }
@@ -257,8 +259,13 @@ class CrosswordGame {
                     const input = document.createElement('input');
                     input.type = 'text';
                     input.maxLength = 1;
+                    input.setAttribute('autocomplete', 'off');
+                    input.setAttribute('autocorrect', 'off');
+                    input.setAttribute('autocapitalize', 'off');
+                    input.setAttribute('spellcheck', 'false');
                     input.addEventListener('input', (e) => this.handleInput(e));
                     input.addEventListener('focus', () => this.selectCell(cell));
+                    input.addEventListener('contextmenu', (e) => e.preventDefault());
                     cell.appendChild(input);
                     
                     // Add number if this cell starts a word
@@ -332,10 +339,15 @@ class CrosswordGame {
         this.currentCell = { row, col, element: cell };
         cell.classList.add('active');
         
-        // Focus the input
+        // Focus the input but prevent scrolling
         const input = cell.querySelector('input');
         if (input) {
-            input.focus();
+            input.focus({ preventScroll: true });
+            
+            // Immediately blur to prevent any scrolling behavior
+            setTimeout(() => {
+                input.blur();
+            }, 1);
         }
         
         // Highlight the current word
@@ -838,7 +850,13 @@ class CrosswordGame {
     }
     
     highlightCurrentClue() {
-        if (!this.currentCell) return;
+        if (!this.currentCell) {
+            // Hide the mobile clue display if no cell is selected
+            if (this.currentClueDisplay) {
+                this.currentClueDisplay.style.display = 'none';
+            }
+            return;
+        }
         
         this.clearClueHighlights();
         
@@ -856,6 +874,14 @@ class CrosswordGame {
                 if (clueElement) {
                     clueElement.classList.add('active');
                 }
+                
+                // Update mobile clue display
+                if (this.currentClueDisplay && this.currentClueText) {
+                    const directionText = this.currentDirection === 'across' ? 'Across' : 'Down';
+                    this.currentClueText.textContent = `${clue.number} ${directionText}: ${clue.clue}`;
+                    this.currentClueDisplay.style.display = 'block';
+                }
+                
                 break;
             }
         }

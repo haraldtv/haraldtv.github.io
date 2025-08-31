@@ -27,6 +27,11 @@ body {
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
+    
+    /* Prevent viewport shifting on mobile */
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 /* Hide scrollbars while keeping scroll functionality */
@@ -51,10 +56,12 @@ html::-webkit-scrollbar {
 }
 
 .app-container {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow-y: auto;
+    position: relative;
 }
 
 .daily-puzzle-banner {
@@ -109,6 +116,29 @@ html::-webkit-scrollbar {
     flex-direction: column;
     gap: 24px;
     align-items: center;
+}
+
+.current-clue {
+    background-color: var(--ios-bg);
+    border: 1px solid var(--ios-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.current-clue-text {
+    font-size: 14px;
+    color: var(--ios-secondary-text);
+    font-weight: 500;
+}
+
+/* Mobile-only class - hide on desktop */
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none !important;
+    }
 }
 
 .crossword-grid {
@@ -202,6 +232,19 @@ html::-webkit-scrollbar {
     color: inherit;
     outline: none;
     caret-color: transparent;
+    
+    /* Disable iOS context menu and selection */
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    touch-action: manipulation;
+    
+    /* Prevent viewport shifting and scrolling */
+    position: relative;
+    transform: translateZ(0);
+    -webkit-appearance: none;
+    -webkit-transform: translateZ(0);
 }
 
 .cell-number {
