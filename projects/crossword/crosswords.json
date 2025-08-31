@@ -99,6 +99,92 @@
           { "number": 4, "clue": "Courteous title for a woman", "answer": "LADY", "startRow": 0, "startCol": 3 }
         ]
       }
-    }
+    },
+    {
+"id": 5,
+"grid": [
+["U", "S", "A", "", ""],
+["S", "A", "L", "T", ""],
+["A", "V", "O", "I", "D"],
+["G", "E", "N", "R", "E"],
+["E", "D", "G", "E", "S"]
+],
+"clues": {
+"across": [
+{
+"number": 1,
+"clue": "North American country (abbr.)",
+"answer": "USA",
+"startRow": 0,
+"startCol": 0
+},
+{
+"number": 4,
+"clue": "Common seasoning made from sodium chloride",
+"answer": "SALT",
+"startRow": 1,
+"startCol": 0
+},
+{
+"number": 6,
+"clue": "Stay away from",
+"answer": "AVOID",
+"startRow": 2,
+"startCol": 0
+},
+{
+"number": 8,
+"clue": "Category of artistic work (music, film, etc.)",
+"answer": "GENRE",
+"startRow": 3,
+"startCol": 0
+},
+{
+"number": 9,
+"clue": "Borders or rims",
+"answer": "EDGES",
+"startRow": 4,
+"startCol": 0
+}
+],
+"down": [
+{
+"number": 1,
+"clue": "How something is used",
+"answer": "USAGE",
+"startRow": 0,
+"startCol": 0
+},
+{
+"number": 2,
+"clue": "Rescued or kept for later",
+"answer": "SAVED",
+"startRow": 0,
+"startCol": 1
+},
+{
+"number": 3,
+"clue": "Together with; in company with",
+"answer": "ALONG",
+"startRow": 0,
+"startCol": 2
+},
+{
+"number": 5,
+"clue": "Grow weary",
+"answer": "TIRE",
+"startRow": 1,
+"startCol": 3
+},
+{
+"number": 7,
+"clue": "French plural article meaning 'of the' (or old encryption standard, abbr.)",
+"answer": "DES",
+"startRow": 2,
+"startCol": 4
+}
+]
+}
+}
   ]
 }
