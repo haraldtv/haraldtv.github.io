@@ -1,3 +1,105 @@
+class Modal {
+    constructor() {
+        this.modalElement = null;
+        this.backdropElement = null;
+        this.isVisible = false;
+    }
+    
+    show(title, message, buttonText = 'OK', onClose = null) {
+        if (this.isVisible) return;
+        
+        this.create(title, message, buttonText, onClose);
+        document.body.appendChild(this.backdropElement);
+        
+        // Disable page interaction
+        this.disablePage();
+        
+        // Show with animation
+        setTimeout(() => {
+            this.backdropElement.classList.add('modal-visible');
+            this.modalElement.classList.add('modal-visible');
+        }, 10);
+        
+        this.isVisible = true;
+    }
+    
+    hide() {
+        if (!this.isVisible) return;
+        
+        this.backdropElement.classList.remove('modal-visible');
+        this.modalElement.classList.remove('modal-visible');
+        
+        setTimeout(() => {
+            if (this.backdropElement && this.backdropElement.parentNode) {
+                document.body.removeChild(this.backdropElement);
+            }
+            this.enablePage();
+            this.isVisible = false;
+        }, 300);
+    }
+    
+    create(title, message, buttonText, onClose) {
+        // Create backdrop
+        this.backdropElement = document.createElement('div');
+        this.backdropElement.className = 'modal-backdrop';
+        
+        // Create modal
+        this.modalElement = document.createElement('div');
+        this.modalElement.className = 'modal';
+        
+        // Create modal content
+        this.modalElement.innerHTML = `
+            <div class="modal-header">
+                <h2 class="modal-title">${title}</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-message">${message}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button">${buttonText}</button>
+            </div>
+        `;
+        
+        // Add click handlers
+        const button = this.modalElement.querySelector('.modal-button');
+        button.addEventListener('click', () => {
+            this.hide();
+            if (onClose) onClose();
+        });
+        
+        // Close on backdrop click
+        this.backdropElement.addEventListener('click', (e) => {
+            if (e.target === this.backdropElement) {
+                this.hide();
+                if (onClose) onClose();
+            }
+        });
+        
+        // Add modal to backdrop
+        this.backdropElement.appendChild(this.modalElement);
+    }
+    
+    disablePage() {
+        const appContainer = document.querySelector('.app-container');
+        const puzzleListContainer = document.querySelector('.puzzle-list-container');
+        
+        if (appContainer) appContainer.style.pointerEvents = 'none';
+        if (puzzleListContainer) puzzleListContainer.style.pointerEvents = 'none';
+        
+        document.body.style.overflow = 'hidden';
+    }
+    
+    enablePage() {
+        const appContainer = document.querySelector('.app-container');
+        const puzzleListContainer = document.querySelector('.puzzle-list-container');
+        
+        if (appContainer) appContainer.style.pointerEvents = '';
+        if (puzzleListContainer) puzzleListContainer.style.pointerEvents = '';
+        
+        document.body.style.overflow = '';
+    }
+}
+
 class CrosswordGame {
     constructor() {
         this.currentPuzzle = null;
@@ -17,6 +119,7 @@ class CrosswordGame {
         this.puzzleListContainer = document.getElementById('puzzle-list-container');
         this.puzzleList = document.getElementById('puzzle-list');
         this.mainContainer = document.querySelector('.app-container');
+        this.modal = new Modal();
         
         this.init();
     }
@@ -494,7 +597,11 @@ class CrosswordGame {
         
         if (allCorrect) {
             setTimeout(() => {
-                alert('Congratulations! You solved the puzzle!');
+                this.modal.show(
+                    'Puzzle Complete! 🎉', 
+                    'Congratulations! You solved the puzzle!',
+                    'Continue'
+                );
             }, 500);
         }
     }
@@ -667,6 +774,79 @@ class CrosswordGame {
             this.renderClues();
             this.clearHighlights();
             this.selectFirstAcrossClue();
+        }
+    }
+    
+    areAllTilesFilled() {
+        for (let row = 0; row < 5; row++) {
+            for (let col = 0; col < 5; col++) {
+                const correctAnswer = this.currentPuzzle.grid[row][col];
+                
+                // Skip empty cells (blocked cells in the puzzle)
+                if (correctAnswer === '') {
+                    continue;
+                }
+                
+                const cell = this.gridContainer.querySelector(
+                    `[data-row="${row}"][data-col="${col}"]`
+                );
+                const input = cell?.querySelector('input');
+                
+                if (!input || input.value.trim() === '') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    autoCheckAnswers() {
+        let allCorrect = true;
+        
+        for (let row = 0; row < 5; row++) {
+            for (let col = 0; col < 5; col++) {
+                const correctAnswer = this.currentPuzzle.grid[row][col];
+                
+                // Skip empty cells (blocked cells in the puzzle)
+                if (correctAnswer === '') {
+                    continue;
+                }
+                
+                const cell = this.gridContainer.querySelector(
+                    `[data-row="${row}"][data-col="${col}"]`
+                );
+                const input = cell?.querySelector('input');
+                
+                if (input) {
+                    const userAnswer = input.value.toUpperCase();
+                    
+                    if (userAnswer !== correctAnswer) {
+                        allCorrect = false;
+                        break;
+                    }
+                }
+            }
+            if (!allCorrect) break;
+        }
+        
+        if (allCorrect) {
+            // Mark all cells as correct
+            document.querySelectorAll('.grid-cell input').forEach(input => {
+                const cell = input.parentElement;
+                cell.classList.remove('incorrect');
+                cell.classList.add('correct');
+            });
+            
+            setTimeout(() => {
+                this.modal.show(
+                    'Puzzle Complete! 🎉', 
+                    'Congratulations! You solved the puzzle!',
+                    'Continue'
+                );
+            }, 500);
+        } else {
+            // Show generic message without marking wrong cells
+            this.showFeedbackMessage('Not quite right. Keep trying!', 'warning');
         }
     }
     
