@@ -339,15 +339,10 @@ class CrosswordGame {
         this.currentCell = { row, col, element: cell };
         cell.classList.add('active');
         
-        // Focus the input but prevent scrolling
+        // Focus the input
         const input = cell.querySelector('input');
         if (input) {
-            input.focus({ preventScroll: true });
-            
-            // Immediately blur to prevent any scrolling behavior
-            setTimeout(() => {
-                input.blur();
-            }, 1);
+            input.focus();
         }
         
         // Highlight the current word
