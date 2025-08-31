@@ -422,17 +422,51 @@ class CrosswordGame {
     handleInput(e) {
         const input = e.target;
         const cell = input.parentElement;
-        const value = input.value.toUpperCase();
+        let value = input.value;
         
-        if (value.match(/[A-Z]/)) {
+        // Only allow a-z and A-Z letters, convert to uppercase
+        if (value.match(/[a-zA-Z]/)) {
+            value = value.toUpperCase();
             input.value = value;
-            this.moveToNextCell();
+            
+            // Check if the current word is now completed
+            const { row, col } = this.currentCell;
+            const currentClues = this.currentDirection === 'across' ? 
+                this.currentPuzzle.clues.across : this.currentPuzzle.clues.down;
+            
+            // Find current word's clue
+            let currentClue = null;
+            for (const clue of currentClues) {
+                const cells = this.getWordCells(clue.startRow, clue.startCol, this.currentDirection);
+                if (cells.some(cell => cell.row === row && cell.col === col)) {
+                    currentClue = clue;
+                    break;
+                }
+            }
+            
+            if (currentClue && this.isWordCompleted(currentClue, this.currentDirection)) {
+                // Word is now completed, move to next word
+                this.moveToNextWord();
+            } else {
+                // Word not completed, check if this is the last cell of the current word
+                const cells = this.getWordCells(row, col, this.currentDirection);
+                const currentIndex = cells.findIndex(cell => cell.row === row && cell.col === col);
+                
+                if (currentIndex === cells.length - 1) {
+                    // This is the last letter of the word, move to next word
+                    this.moveToNextWord();
+                } else {
+                    // Move to next cell in same word
+                    this.moveToNextCell();
+                }
+            }
             
             // Check if all tiles are filled and auto-check
             if (this.areAllTilesFilled()) {
                 setTimeout(() => this.autoCheckAnswers(), 200);
             }
         } else {
+            // Invalid input - clear the field
             input.value = '';
         }
     }
@@ -440,24 +474,106 @@ class CrosswordGame {
     handleKeyPress(e) {
         if (!this.currentCell) return;
         
+        // Handle letter input directly from keyboard
+        if (e.key.match(/^[a-zA-Z]$/)) {
+            e.preventDefault();
+            const input = this.currentCell.element.querySelector('input');
+            if (input) {
+                const value = e.key.toUpperCase();
+                input.value = value;
+                
+                // Check if the current word is now completed
+                const { row, col } = this.currentCell;
+                const currentClues = this.currentDirection === 'across' ? 
+                    this.currentPuzzle.clues.across : this.currentPuzzle.clues.down;
+                
+                // Find current word's clue
+                let currentClue = null;
+                for (const clue of currentClues) {
+                    const cells = this.getWordCells(clue.startRow, clue.startCol, this.currentDirection);
+                    if (cells.some(cell => cell.row === row && cell.col === col)) {
+                        currentClue = clue;
+                        break;
+                    }
+                }
+                
+                if (currentClue && this.isWordCompleted(currentClue, this.currentDirection)) {
+                    // Word is now completed, move to next word
+                    this.moveToNextWord();
+                } else {
+                    // Word not completed, check if this is the last cell of the current word
+                    const cells = this.getWordCells(row, col, this.currentDirection);
+                    const currentIndex = cells.findIndex(cell => cell.row === row && cell.col === col);
+                    
+                    if (currentIndex === cells.length - 1) {
+                        // This is the last letter of the word, move to next word
+                        this.moveToNextWord();
+                    } else {
+                        // Move to next cell in same word
+                        this.moveToNextCell();
+                    }
+                }
+                
+                // Check if all tiles are filled and auto-check
+                if (this.areAllTilesFilled()) {
+                    setTimeout(() => this.autoCheckAnswers(), 200);
+                }
+            }
+            return;
+        }
+        
+        // Handle navigation and special keys
         switch (e.key) {
             case 'ArrowUp':
                 e.preventDefault();
-                this.moveTo(-1, 0);
+                if (this.currentDirection === 'down') {
+                    // In down mode, navigate up
+                    this.moveTo(-1, 0);
+                } else {
+                    // In across mode, switch to down mode
+                    this.currentDirection = 'down';
+                    this.highlightCurrentWord();
+                    this.highlightCurrentClue();
+                }
                 break;
             case 'ArrowDown':
                 e.preventDefault();
-                this.moveTo(1, 0);
+                if (this.currentDirection === 'down') {
+                    // In down mode, navigate down
+                    this.moveTo(1, 0);
+                } else {
+                    // In across mode, switch to down mode
+                    this.currentDirection = 'down';
+                    this.highlightCurrentWord();
+                    this.highlightCurrentClue();
+                }
                 break;
             case 'ArrowLeft':
                 e.preventDefault();
-                this.moveTo(0, -1);
+                if (this.currentDirection === 'across') {
+                    // In across mode, navigate left
+                    this.moveTo(0, -1);
+                } else {
+                    // In down mode, switch to across mode
+                    this.currentDirection = 'across';
+                    this.highlightCurrentWord();
+                    this.highlightCurrentClue();
+                }
                 break;
             case 'ArrowRight':
                 e.preventDefault();
-                this.moveTo(0, 1);
+                if (this.currentDirection === 'across') {
+                    // In across mode, navigate right
+                    this.moveTo(0, 1);
+                } else {
+                    // In down mode, switch to across mode
+                    this.currentDirection = 'across';
+                    this.highlightCurrentWord();
+                    this.highlightCurrentClue();
+                }
                 break;
             case 'Backspace':
+                e.preventDefault();
                 this.handleBackspace(e);
                 break;
             case ' ':
@@ -472,14 +588,23 @@ class CrosswordGame {
                 e.preventDefault();
                 this.moveToNextWord();
                 break;
+            default:
+                // Prevent all other keys from being entered
+                e.preventDefault();
+                break;
         }
     }
     
     handleBackspace(e) {
         const input = this.currentCell.element.querySelector('input');
-        if (input && input.value === '') {
-            e.preventDefault();
-            this.moveToPreviousCell();
+        if (input) {
+            if (input.value !== '') {
+                // Clear the current cell
+                input.value = '';
+            } else {
+                // Current cell is empty, move to previous cell and clear it
+                this.moveToPreviousCell();
+            }
         }
     }
     
@@ -546,21 +671,47 @@ class CrosswordGame {
         this.highlightCurrentClue();
     }
     
+    isWordCompleted(clue, direction) {
+        const cells = this.getWordCells(clue.startRow, clue.startCol, direction);
+        for (const cellPos of cells) {
+            const cell = this.gridContainer.querySelector(
+                `[data-row="${cellPos.row}"][data-col="${cellPos.col}"]`
+            );
+            const input = cell?.querySelector('input');
+            if (!input || input.value.trim() === '') {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    findFirstEmptyCell(clue, direction) {
+        const cells = this.getWordCells(clue.startRow, clue.startCol, direction);
+        for (const cellPos of cells) {
+            const cell = this.gridContainer.querySelector(
+                `[data-row="${cellPos.row}"][data-col="${cellPos.col}"]`
+            );
+            const input = cell?.querySelector('input');
+            if (input && input.value.trim() === '') {
+                return cell;
+            }
+        }
+        return null; // Word is completed
+    }
+    
     moveToNextWord() {
         if (!this.currentCell) return;
         
         const { row, col } = this.currentCell;
-        const currentClues = this.currentDirection === 'across' ? 
+        let currentClues = this.currentDirection === 'across' ? 
             this.currentPuzzle.clues.across : this.currentPuzzle.clues.down;
         
         // Find current word's clue
-        let currentClue = null;
         let currentClueIndex = -1;
         for (let i = 0; i < currentClues.length; i++) {
             const clue = currentClues[i];
             const cells = this.getWordCells(clue.startRow, clue.startCol, this.currentDirection);
             if (cells.some(cell => cell.row === row && cell.col === col)) {
-                currentClue = clue;
                 currentClueIndex = i;
                 break;
             }
@@ -568,36 +719,47 @@ class CrosswordGame {
         
         if (currentClueIndex === -1) return;
         
-        // Check if we're at the last word in current direction
-        const isLastWordInDirection = currentClueIndex === currentClues.length - 1;
+        // Start looking for the next incomplete word
+        let searchIndex = currentClueIndex + 1;
+        let searchDirection = this.currentDirection;
+        let searchClues = currentClues;
         
-        if (isLastWordInDirection) {
-            // Switch to the other direction and go to first word
-            this.currentDirection = this.currentDirection === 'across' ? 'down' : 'across';
-            const newDirectionClues = this.currentDirection === 'across' ? 
-                this.currentPuzzle.clues.across : this.currentPuzzle.clues.down;
-            
-            if (newDirectionClues.length > 0) {
-                const nextClue = newDirectionClues[0];
-                const nextCell = this.gridContainer.querySelector(
-                    `[data-row="${nextClue.startRow}"][data-col="${nextClue.startCol}"]`
-                );
-                if (nextCell) {
-                    this.selectCell(nextCell);
+        // Search through remaining words in current direction
+        while (searchIndex < searchClues.length) {
+            const clue = searchClues[searchIndex];
+            if (!this.isWordCompleted(clue, searchDirection)) {
+                const firstEmptyCell = this.findFirstEmptyCell(clue, searchDirection);
+                if (firstEmptyCell) {
+                    this.currentDirection = searchDirection;
+                    this.selectCell(firstEmptyCell);
+                    return;
                 }
             }
-        } else {
-            // Move to next word in same direction
-            const nextIndex = currentClueIndex + 1;
-            const nextClue = currentClues[nextIndex];
-            
-            const nextCell = this.gridContainer.querySelector(
-                `[data-row="${nextClue.startRow}"][data-col="${nextClue.startCol}"]`
-            );
-            if (nextCell) {
-                this.selectCell(nextCell);
-            }
+            searchIndex++;
         }
+        
+        // If we reached here, all remaining words in current direction are completed
+        // Switch direction and search from the beginning
+        searchDirection = searchDirection === 'across' ? 'down' : 'across';
+        searchClues = searchDirection === 'across' ? 
+            this.currentPuzzle.clues.across : this.currentPuzzle.clues.down;
+        searchIndex = 0;
+        
+        // Search through all words in the other direction
+        while (searchIndex < searchClues.length) {
+            const clue = searchClues[searchIndex];
+            if (!this.isWordCompleted(clue, searchDirection)) {
+                const firstEmptyCell = this.findFirstEmptyCell(clue, searchDirection);
+                if (firstEmptyCell) {
+                    this.currentDirection = searchDirection;
+                    this.selectCell(firstEmptyCell);
+                    return;
+                }
+            }
+            searchIndex++;
+        }
+        
+        // If we reach here, all words are completed - stay on current cell
     }
     
     checkAnswers() {
