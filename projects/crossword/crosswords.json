@@ -3,22 +3,24 @@
     {
       "id": 1,
       "grid": [
-        ["H", "E", "A", "R", "T"],
-        ["O", "", "P", "", "H"],
-        ["U", "S", "E", "R", "S"],
-        ["S", "", "A", "", "E"],
-        ["E", "A", "R", "L", "Y"]
+        ["W", "A", "I", "T", ""],
+        ["E", "U", "R", "O", ""],
+        ["S", "T", "O", "P", ""],
+        ["T", "O", "N", "S", ""],
+        ["", "", "", "", ""]
       ],
       "clues": {
         "across": [
-          {"number": 1, "clue": "Organ that pumps blood", "answer": "HEART", "startRow": 0, "startCol": 0},
-          {"number": 3, "clue": "People who operate something", "answer": "USERS", "startRow": 2, "startCol": 0},
-          {"number": 5, "clue": "Before the usual time", "answer": "EARLY", "startRow": 4, "startCol": 0}
+          { "number": 1, "clue": "Pause before acting", "answer": "WAIT", "startRow": 0, "startCol": 0 },
+          { "number": 2, "clue": "Currency used in Slovakia", "answer": "EURO", "startRow": 1, "startCol": 0 },
+          { "number": 3, "clue": "Bring to a halt", "answer": "STOP", "startRow": 2, "startCol": 0 },
+          { "number": 4, "clue": "Heaps; large amounts", "answer": "TONS", "startRow": 3, "startCol": 0 }
         ],
         "down": [
-          {"number": 1, "clue": "Building where people live", "answer": "HOUSE", "startRow": 0, "startCol": 0},
-          {"number": 2, "clue": "Body part for hearing", "answer": "EAR", "startRow": 0, "startCol": 1},
-          {"number": 4, "clue": "Not there", "answer": "HERE", "startRow": 0, "startCol": 4}
+          { "number": 1, "clue": "Direction where the sun sets", "answer": "WEST", "startRow": 0, "startCol": 0 },
+          { "number": 2, "clue": "...-pilot", "answer": "AUTO", "startRow": 0, "startCol": 1 },
+          { "number": 2, "clue": "Metal — or the clothes-pressing tool", "answer": "IRON", "startRow": 0, "startCol": 2 },
+          { "number": 4, "clue": "At most; the maximum", "answer": "TOPS", "startRow": 0, "startCol": 3 }
         ]
       }
     },
@@ -33,14 +35,14 @@
       ],
       "clues": {
         "across": [
-          {"number": 1, "clue": "Food made from flour", "answer": "BREAD", "startRow": 0, "startCol": 0},
-          {"number": 3, "clue": "People who operate something", "answer": "USERS", "startRow": 2, "startCol": 0},
-          {"number": 5, "clue": "Begin something", "answer": "START", "startRow": 4, "startCol": 0}
+          { "number": 1, "clue": "Food made from flour", "answer": "BREAD", "startRow": 0, "startCol": 0 },
+          { "number": 3, "clue": "People who operate something", "answer": "USERS", "startRow": 2, "startCol": 0 },
+          { "number": 5, "clue": "Begin something", "answer": "START", "startRow": 4, "startCol": 0 }
         ],
         "down": [
-          {"number": 1, "clue": "Feeling sad", "answer": "BLUES", "startRow": 0, "startCol": 0},
-          {"number": 2, "clue": "What you use to see", "answer": "RETINA", "startRow": 0, "startCol": 1},
-          {"number": 4, "clue": "Information or statistics", "answer": "DATA", "startRow": 0, "startCol": 4}
+          { "number": 1, "clue": "Feeling sad", "answer": "BLUES", "startRow": 0, "startCol": 0 },
+          { "number": 2, "clue": "What you use to see", "answer": "RETINA", "startRow": 0, "startCol": 1 },
+          { "number": 4, "clue": "Information or statistics", "answer": "DATA", "startRow": 0, "startCol": 4 }
         ]
       }
     },
@@ -55,14 +57,14 @@
       ],
       "clues": {
         "across": [
-          {"number": 1, "clue": "Piece of furniture with a flat top", "answer": "TABLE", "startRow": 0, "startCol": 0},
-          {"number": 3, "clue": "People who operate something", "answer": "USERS", "startRow": 2, "startCol": 0},
-          {"number": 5, "clue": "Begin something", "answer": "START", "startRow": 4, "startCol": 0}
+          { "number": 1, "clue": "Piece of furniture with a flat top", "answer": "TABLE", "startRow": 0, "startCol": 0 },
+          { "number": 3, "clue": "People who operate something", "answer": "USERS", "startRow": 2, "startCol": 0 },
+          { "number": 5, "clue": "Begin something", "answer": "START", "startRow": 4, "startCol": 0 }
         ],
         "down": [
-          {"number": 1, "clue": "Correct, not false", "answer": "TRUES", "startRow": 0, "startCol": 0},
-          {"number": 2, "clue": "All of something", "answer": "ALLES", "startRow": 0, "startCol": 1},
-          {"number": 4, "clue": "Consume food", "answer": "EATS", "startRow": 0, "startCol": 4}
+          { "number": 1, "clue": "Correct, not false", "answer": "TRUES", "startRow": 0, "startCol": 0 },
+          { "number": 2, "clue": "All of something", "answer": "ALLES", "startRow": 0, "startCol": 1 },
+          { "number": 4, "clue": "Consume food", "answer": "EATS", "startRow": 0, "startCol": 4 }
         ]
       }
     },
@@ -77,24 +79,24 @@
       ],
       "clues": {
         "across": [
-          {"number": 1, "clue": "Planet Earth", "answer": "WORLD", "startRow": 0, "startCol": 0},
-          {"number": 6, "clue": "Regions or zones", "answer": "AREAS", "startRow": 1, "startCol": 0},
-          {"number": 7, "clue": "Sports groups", "answer": "TEAMS", "startRow": 2, "startCol": 0},
-          {"number": 8, "clue": "Mistake", "answer": "ERROR", "startRow": 3, "startCol": 0},
-          {"number": 9, "clue": "RSS feeds", "answer": "RSSSS", "startRow": 4, "startCol": 0}
+          { "number": 1, "clue": "Planet Earth", "answer": "WORLD", "startRow": 0, "startCol": 0 },
+          { "number": 6, "clue": "Regions or zones", "answer": "AREAS", "startRow": 1, "startCol": 0 },
+          { "number": 7, "clue": "Sports groups", "answer": "TEAMS", "startRow": 2, "startCol": 0 },
+          { "number": 8, "clue": "Mistake", "answer": "ERROR", "startRow": 3, "startCol": 0 },
+          { "number": 9, "clue": "RSS feeds", "answer": "RSSSS", "startRow": 4, "startCol": 0 }
         ],
         "down": [
-          {"number": 1, "clue": "H2O", "answer": "WATER", "startRow": 0, "startCol": 0},
-          {"number": 2, "clue": "Mineral deposits", "answer": "ORERS", "startRow": 0, "startCol": 1},
-          {"number": 3, "clue": "Back parts", "answer": "REARS", "startRow": 0, "startCol": 2},
-          {"number": 4, "clue": "Lamps", "answer": "LAMOS", "startRow": 0, "startCol": 3},
-          {"number": 5, "clue": "Data", "answer": "DSSRS", "startRow": 0, "startCol": 4}
+          { "number": 1, "clue": "H2O", "answer": "WATER", "startRow": 0, "startCol": 0 },
+          { "number": 2, "clue": "Mineral deposits", "answer": "ORERS", "startRow": 0, "startCol": 1 },
+          { "number": 3, "clue": "Back parts", "answer": "REARS", "startRow": 0, "startCol": 2 },
+          { "number": 4, "clue": "Lamps", "answer": "LAMOS", "startRow": 0, "startCol": 3 },
+          { "number": 5, "clue": "Data", "answer": "DSSRS", "startRow": 0, "startCol": 4 }
         ]
       }
     },
-{
+    {
       "id": 5,
-     "grid": [
+      "grid": [
         ["W", "A", "L", "L", ""],
         ["A", "R", "E", "A", ""],
         ["L", "E", "A", "D", ""],
@@ -113,8 +115,8 @@
           { "number": 2, "clue": "Space enclosed within boundaries", "answer": "AREA", "startRow": 0, "startCol": 1 },
           { "number": 3, "clue": "Metal with chemical symbol Pb", "answer": "LEAD", "startRow": 0, "startCol": 2 },
           { "number": 4, "clue": "Courteous title for a woman", "answer": "LADY", "startRow": 0, "startCol": 3 }
-        ] 
+        ]
+      }
     }
-  }
   ]
 }
