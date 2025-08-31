@@ -87,6 +87,9 @@ class Modal {
         if (puzzleListContainer) puzzleListContainer.style.pointerEvents = 'none';
         
         document.body.style.overflow = 'hidden';
+        
+        // Hide iOS keyboard by blurring active input
+        this.hideKeyboard();
     }
     
     enablePage() {
@@ -97,6 +100,32 @@ class Modal {
         if (puzzleListContainer) puzzleListContainer.style.pointerEvents = '';
         
         document.body.style.overflow = '';
+    }
+    
+    hideKeyboard() {
+        // Force blur on any active input to hide mobile keyboard
+        const activeElement = document.activeElement;
+        if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+            activeElement.blur();
+        }
+        
+        // Additional iOS-specific keyboard hiding techniques
+        if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            // Create a temporary input and focus/blur it to force keyboard to hide
+            const tempInput = document.createElement('input');
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-9999px';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            
+            setTimeout(() => {
+                tempInput.focus();
+                setTimeout(() => {
+                    tempInput.blur();
+                    document.body.removeChild(tempInput);
+                }, 100);
+            }, 100);
+        }
     }
 }
 
@@ -120,6 +149,8 @@ class CrosswordGame {
         this.puzzleList = document.getElementById('puzzle-list');
         this.mainContainer = document.querySelector('.app-container');
         this.modal = new Modal();
+        this.dailyBanner = document.getElementById('daily-puzzle-banner');
+        this.bannerText = document.getElementById('banner-text');
         
         this.init();
     }
@@ -150,6 +181,7 @@ class CrosswordGame {
         this.renderGrid();
         this.renderClues();
         this.clearHighlights();
+        this.updateDailyBanner();
         
         // Auto-select 1 Across to start
         this.selectFirstAcrossClue();
@@ -178,6 +210,7 @@ class CrosswordGame {
         this.renderGrid();
         this.renderClues();
         this.clearHighlights();
+        this.updateDailyBanner();
         
         // Auto-select 1 Across to start
         this.selectFirstAcrossClue();
@@ -773,6 +806,7 @@ class CrosswordGame {
             this.renderGrid();
             this.renderClues();
             this.clearHighlights();
+            this.updateDailyBanner();
             this.selectFirstAcrossClue();
         }
     }
@@ -845,9 +879,54 @@ class CrosswordGame {
                 );
             }, 500);
         } else {
-            // Show generic message without marking wrong cells
-            this.showFeedbackMessage('Not quite right. Keep trying!', 'warning');
+            // Show modal for incorrect completion
+            setTimeout(() => {
+                this.modal.show(
+                    'Not Quite Right',
+                    'Keep trying! You\'re close to solving this puzzle.',
+                    'Try Again'
+                );
+            }, 200);
         }
+    }
+    
+    updateDailyBanner() {
+        if (!this.dailyBanner || !this.bannerText) return;
+        
+        const isDailyPuzzle = this.isCurrentPuzzleToday();
+        
+        if (isDailyPuzzle) {
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric', 
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            this.bannerText.textContent = `Today's puzzle • ${formattedDate}`;
+            this.dailyBanner.style.display = 'block';
+        } else {
+            this.dailyBanner.style.display = 'none';
+        }
+    }
+    
+    isCurrentPuzzleToday() {
+        if (!this.currentPuzzle) return false;
+        
+        // Start date: August 31, 2025
+        const startDate = new Date(2025, 7, 31); // Month is 0-indexed, so 7 = August
+        const today = new Date();
+        
+        // Calculate days since start date
+        const timeDifference = today.getTime() - startDate.getTime();
+        const daysSinceStart = Math.floor(timeDifference / (1000 * 3600 * 24));
+        
+        // Calculate what today's puzzle ID should be
+        const todaysPuzzleId = (daysSinceStart % this.puzzles.length) + 1;
+        
+        // Check if current puzzle matches today's puzzle
+        return this.currentPuzzle.id === todaysPuzzleId;
     }
     
     async registerServiceWorker() {
