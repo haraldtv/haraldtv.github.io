@@ -1,8 +1,8 @@
 {
-  "name": "Mini Crossword",
+  "name": "Pocket Sized Crossword",
   "short_name": "Crossword",
   "description": "A mobile-first 5x5 crossword puzzle game",
-  "start_url": "/",
+  "start_url": "https://tverdal.com/projects/crossword/index.html",
   "display": "standalone",
   "background_color": "#F2F2F7",
   "theme_color": "#007AFF",
