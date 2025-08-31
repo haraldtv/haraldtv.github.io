@@ -19,7 +19,7 @@
         "down": [
           { "number": 1, "clue": "Direction where the sun sets", "answer": "WEST", "startRow": 0, "startCol": 0 },
           { "number": 2, "clue": "...-pilot", "answer": "AUTO", "startRow": 0, "startCol": 1 },
-          { "number": 2, "clue": "Metal — or the clothes-pressing tool", "answer": "IRON", "startRow": 0, "startCol": 2 },
+          { "number": 3, "clue": "Metal — or the clothes-pressing tool", "answer": "IRON", "startRow": 0, "startCol": 2 },
           { "number": 4, "clue": "At most; the maximum", "answer": "TOPS", "startRow": 0, "startCol": 3 }
         ]
       }
