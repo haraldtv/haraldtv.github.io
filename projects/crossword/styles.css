@@ -1,0 +1,525 @@
+:root {
+    --ios-blue: #007AFF;
+    --ios-gray: #8E8E93;
+    --ios-light-gray: #F2F2F7;
+    --ios-bg: #FFFFFF;
+    --ios-secondary-bg: #F2F2F7;
+    --ios-border: #C6C6C8;
+    --ios-text: #000000;
+    --ios-secondary-text: #3C3C43;
+    --grid-size: 5;
+    --cell-size: min(12vw, 60px);
+    --border-radius: 12px;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--ios-light-gray);
+    color: var(--ios-text);
+    line-height: 1.4;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.app-header {
+    background-color: var(--ios-bg);
+    padding: 20px 16px 16px;
+    border-bottom: 1px solid var(--ios-border);
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.app-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ios-text);
+    margin: 0;
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.crossword-grid {
+    background-color: var(--ios-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    gap: 2px;
+    background-color: var(--ios-border);
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.grid-cell {
+    background-color: var(--ios-bg);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ios-text);
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+    outline: none;
+}
+
+.grid-cell:first-child {
+    border-top-left-radius: 6px;
+}
+
+.grid-cell:nth-child(5) {
+    border-top-right-radius: 6px;
+}
+
+.grid-cell:nth-child(21) {
+    border-bottom-left-radius: 6px;
+}
+
+.grid-cell:last-child {
+    border-bottom-right-radius: 6px;
+}
+
+.grid-cell.blocked {
+    background-color: var(--ios-text);
+    cursor: default;
+}
+
+.grid-cell.active {
+    background-color: var(--ios-blue);
+    color: white;
+    transform: scale(1.05);
+}
+
+.grid-cell.highlighted {
+    background-color: rgba(0, 122, 255, 0.1);
+}
+
+.grid-cell.correct {
+    background-color: #34C759;
+    color: white;
+}
+
+.grid-cell.incorrect {
+    background-color: #FF3B30;
+    color: white;
+    animation: shake 0.5s ease-in-out;
+}
+
+.grid-cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: inherit;
+    outline: none;
+    caret-color: transparent;
+}
+
+.cell-number {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ios-text);
+    line-height: 1;
+}
+
+.clues-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--ios-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.clues-section {
+    padding: 16px 20px;
+}
+
+.clues-section:not(:last-child) {
+    border-bottom: 1px solid var(--ios-border);
+}
+
+.clues-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ios-text);
+    margin-bottom: 12px;
+}
+
+.clues-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.clue-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 16px;
+    background-color: var(--ios-secondary-bg);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.clue-item:active {
+    background-color: var(--ios-border);
+    transform: scale(0.98);
+}
+
+.clue-item.active {
+    background-color: var(--ios-blue);
+    color: white;
+}
+
+.clue-number {
+    font-weight: 700;
+    margin-right: 8px;
+    min-width: 20px;
+    color: var(--ios-blue);
+}
+
+.clue-item.active .clue-number {
+    color: white;
+}
+
+.clue-text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.btn {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background-color: var(--ios-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056CC;
+}
+
+.btn-secondary {
+    background-color: var(--ios-secondary-bg);
+    color: var(--ios-blue);
+    border: 1px solid var(--ios-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--ios-border);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+.feedback-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--ios-bg);
+    color: var(--ios-text);
+    padding: 16px 24px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-size: 17px;
+    font-weight: 600;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    max-width: 280px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.feedback-message.warning {
+    background-color: #FF9500;
+    color: white;
+}
+
+.feedback-message.success {
+    background-color: #34C759;
+    color: white;
+}
+
+/* Puzzle List Styles */
+.puzzle-list-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--ios-light-gray);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.back-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    color: var(--ios-blue);
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 8px 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.2s ease;
+}
+
+.btn-back:active {
+    opacity: 0.6;
+}
+
+.puzzle-list-content {
+    flex: 1;
+    padding: 20px 16px;
+    overflow-y: auto;
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.puzzle-item {
+    background-color: var(--ios-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    border: 2px solid transparent;
+}
+
+.puzzle-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.puzzle-item:active {
+    transform: scale(0.98);
+    border-color: var(--ios-blue);
+}
+
+.puzzle-item.current {
+    border-color: var(--ios-blue);
+    background-color: rgba(0, 122, 255, 0.05);
+}
+
+.puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.puzzle-number {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ios-blue);
+}
+
+.puzzle-status {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.puzzle-status.completed {
+    background-color: #34C759;
+    color: white;
+}
+
+.puzzle-status.in-progress {
+    background-color: #FF9500;
+    color: white;
+}
+
+.puzzle-status.new {
+    background-color: var(--ios-border);
+    color: var(--ios-secondary-text);
+}
+
+.puzzle-preview {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background-color: var(--ios-border);
+    border-radius: 4px;
+    padding: 1px;
+    margin-bottom: 12px;
+    max-width: 100px;
+}
+
+.preview-cell {
+    aspect-ratio: 1;
+    background-color: var(--ios-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--ios-secondary-text);
+}
+
+.preview-cell.blocked {
+    background-color: var(--ios-text);
+}
+
+.puzzle-info {
+    color: var(--ios-secondary-text);
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.puzzle-clue-count {
+    font-weight: 600;
+    color: var(--ios-text);
+}
+
+@media (min-width: 768px) {
+    :root {
+        --cell-size: 50px;
+    }
+    
+    .main-content {
+        padding: 40px;
+    }
+    
+    .game-container {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 40px;
+    }
+    
+    .crossword-grid {
+        flex-shrink: 0;
+    }
+    
+    .clues-container {
+        max-width: 300px;
+        flex-shrink: 0;
+    }
+    
+    .controls {
+        max-width: 600px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    :root {
+        --cell-size: min(8vh, 50px);
+    }
+    
+    .main-content {
+        padding: 12px 16px;
+    }
+    
+    .game-container {
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .app-header {
+        padding: 12px 16px 8px;
+    }
+    
+    .app-header h1 {
+        font-size: 20px;
+    }
+}

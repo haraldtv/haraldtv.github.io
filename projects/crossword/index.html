@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Pocket Size Crossword</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Pocket Size Crossword">
+    <meta name="theme-color" content="#007AFF">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Pocket Size Crossword</h1>
+        </header>
+        
+        <main class="main-content">
+            <div class="game-container">
+                <div class="crossword-grid">
+                    <div class="grid-container" id="grid-container">
+                        <!-- Grid will be dynamically generated -->
+                    </div>
+                </div>
+                
+                <div class="clues-container">
+                    <div class="clues-section">
+                        <h3>Across</h3>
+                        <div id="clues-across" class="clues-list">
+                            <!-- Across clues will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="clues-section">
+                        <h3>Down</h3>
+                        <div id="clues-down" class="clues-list">
+                            <!-- Down clues will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="all-puzzles-btn" class="btn btn-secondary">All Puzzles</button>
+                <button id="new-game-btn" class="btn btn-primary">New Game</button>
+                <button id="check-btn" class="btn btn-secondary">Check</button>
+                <button id="reveal-btn" class="btn btn-secondary">Reveal</button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Puzzle List Page -->
+    <div class="puzzle-list-container" id="puzzle-list-container" style="display: none;">
+        <header class="app-header">
+            <div class="back-nav">
+                <button id="back-btn" class="btn-back">← Back</button>
+                <h1>All Puzzles</h1>
+            </div>
+        </header>
+        
+        <main class="puzzle-list-content">
+            <div id="puzzle-list" class="puzzle-grid">
+                <!-- Puzzle items will be dynamically generated -->
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
