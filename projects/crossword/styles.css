@@ -486,10 +486,22 @@ html::-webkit-scrollbar {
     margin-bottom: 12px;
 }
 
+.puzzle-title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .puzzle-number {
     font-size: 18px;
     font-weight: 700;
     color: var(--ios-blue);
+}
+
+.puzzle-date {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ios-secondary-text);
 }
 
 .puzzle-status {

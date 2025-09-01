@@ -191,13 +191,40 @@ class CrosswordGame {
     loadDailyPuzzle() {
         if (this.puzzles.length === 0) return;
         
-        // Default to the latest puzzle (highest ID)
-        const latestPuzzle = this.puzzles.reduce((latest, current) => 
-            current.id > latest.id ? current : latest
-        );
+        const today = new Date();
+        const todayDateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
         
-        // Find the index of the latest puzzle
-        const selectedIndex = this.puzzles.findIndex(puzzle => puzzle.id === latestPuzzle.id);
+        // Debug: Check local vs UTC date
+        console.log('Local date:', today.toString());
+        console.log('UTC ISO string:', today.toISOString());
+        console.log('Local date string we use:', todayDateString);
+        
+        // First, try to find a puzzle with today's exact date
+        let selectedPuzzle = this.puzzles.find(puzzle => puzzle.date === todayDateString);
+        
+        if (!selectedPuzzle) {
+            // Fallback: Calculate days since newest puzzle and loop around
+            const newestPuzzle = this.puzzles.reduce((newest, current) => 
+                new Date(current.date) > new Date(newest.date) ? current : newest
+            );
+            
+            const newestDate = new Date(newestPuzzle.date);
+            const daysSinceNewest = Math.floor((today.getTime() - newestDate.getTime()) / (1000 * 3600 * 24));
+            
+            // If it's been 0 days (same day but no exact match), show newest puzzle
+            if (daysSinceNewest === 0) {
+                selectedPuzzle = newestPuzzle;
+            } else {
+                // Loop around based on number of puzzles
+                const puzzleIdToSelect = ((daysSinceNewest - 1) % this.puzzles.length) + 1;
+                
+                // Find puzzle with that ID, or fallback to newest puzzle
+                selectedPuzzle = this.puzzles.find(puzzle => puzzle.id === puzzleIdToSelect) || newestPuzzle;
+            }
+        }
+        
+        // Find the index of the selected puzzle
+        const selectedIndex = this.puzzles.findIndex(puzzle => puzzle.id === selectedPuzzle.id);
         
         this.currentPuzzleIndex = selectedIndex >= 0 ? selectedIndex : 0;
         this.currentPuzzle = this.puzzles[this.currentPuzzleIndex];
@@ -938,9 +965,20 @@ class CrosswordGame {
             const acrossCount = puzzle.clues.across.length;
             const downCount = puzzle.clues.down.length;
             
+            // Format the date for display
+            const puzzleDate = new Date(puzzle.date);
+            const formattedDate = puzzleDate.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+            
             puzzleItem.innerHTML = `
                 <div class="puzzle-header">
-                    <span class="puzzle-number">Puzzle ${puzzle.id}</span>
+                    <div class="puzzle-title">
+                        <span class="puzzle-number">Puzzle ${puzzle.id}</span>
+                        <span class="puzzle-date">${formattedDate}</span>
+                    </div>
                     <span class="puzzle-status new">New</span>
                 </div>
                 <div class="puzzle-info">
@@ -1088,12 +1126,30 @@ class CrosswordGame {
     isCurrentPuzzleToday() {
         if (!this.currentPuzzle) return false;
         
-        // Check if current puzzle is the latest puzzle (highest ID)
-        const latestPuzzle = this.puzzles.reduce((latest, current) => 
-            current.id > latest.id ? current : latest
+        const today = new Date();
+        const todayDateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        
+        // First check: is current puzzle's date exactly today?
+        if (this.currentPuzzle.date === todayDateString) {
+            return true;
+        }
+        
+        // Second check: is current puzzle the calculated "today's puzzle" using fallback logic?
+        const newestPuzzle = this.puzzles.reduce((newest, current) => 
+            new Date(current.date) > new Date(newest.date) ? current : newest
         );
         
-        return this.currentPuzzle.id === latestPuzzle.id;
+        const newestDate = new Date(newestPuzzle.date);
+        const daysSinceNewest = Math.floor((today.getTime() - newestDate.getTime()) / (1000 * 3600 * 24));
+        
+        // If it's been 0 days (same day but no exact match), today's puzzle is the newest
+        if (daysSinceNewest === 0) {
+            return this.currentPuzzle.id === newestPuzzle.id;
+        } else {
+            // Loop around based on number of puzzles
+            const todaysPuzzleId = ((daysSinceNewest - 1) % this.puzzles.length) + 1;
+            return this.currentPuzzle.id === todaysPuzzleId;
+        }
     }
     
     async registerServiceWorker() {

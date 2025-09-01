@@ -2,6 +2,7 @@
   "puzzles": [
     {
       "id": 1,
+      "date": "2025-08-27",
       "grid": [
         ["W", "A", "I", "T", ""],
         ["E", "U", "R", "O", ""],
@@ -26,6 +27,7 @@
     },
     {
 "id": 2,
+"date": "2025-08-28",
 "grid": [
 ["C", "A", "L", "L", ""],
 ["O", "C", "E", "A", "N"],
@@ -52,6 +54,7 @@
 },
     {
 "id": 3,
+"date": "2025-08-29",
 "grid": [
 ["L", "O", "C", "K", ""],
 ["E", "M", "A", "I", "L"],
@@ -78,6 +81,7 @@
 },
     {
       "id": 4,
+      "date": "2025-08-30",
       "grid": [
         ["W", "A", "L", "L", ""],
         ["A", "R", "E", "A", ""],
@@ -102,6 +106,7 @@
     },
     {
 "id": 5,
+"date": "2025-08-31",
 "grid": [
 ["U", "S", "A", "", ""],
 ["S", "A", "L", "T", ""],
@@ -188,6 +193,7 @@
 },
 {
 "id": 6,
+"date": "2025-09-01",
 "grid": [
 ["T", "R", "I", "A", "L"],
 ["R", "A", "D", "I", "O"],
@@ -271,6 +277,34 @@
 }
 ]
 }
+},
+{
+  "id": 7,
+  "date": "2025-09-02",
+  "grid": [
+    ["", "A", "L", "T", ""],
+    ["A", "W", "A", "R", "D"],
+    ["R", "A", "D", "I", "O"],
+    ["T", "R", "E", "E", "S"],
+    ["S", "E", "N", "S", "E"]
+  ],
+  "clues": {
+    "across": [
+      { "number": 1, "clue": "Keyboard key used in many shortcuts (3)", "answer": "ALT", "startRow": 0, "startCol": 1 },
+      { "number": 2, "clue": "Prize given for achievement (5)", "answer": "AWARD", "startRow": 1, "startCol": 0 },
+      { "number": 3, "clue": "Wireless broadcast medium (5)", "answer": "RADIO", "startRow": 2, "startCol": 0 },
+      { "number": 4, "clue": "Tall plants with trunks (5)", "answer": "TREES", "startRow": 3, "startCol": 0 },
+      { "number": 5, "clue": "Perception or feeling (5)", "answer": "SENSE", "startRow": 4, "startCol": 0 }
+    ],
+    "down": [
+      { "number": 1, "clue": "Conscious of; informed (5)", "answer": "AWARE", "startRow": 0, "startCol": 1 },
+      { "number": 2, "clue": "Loaded; burdened (5)", "answer": "LADEN", "startRow": 0, "startCol": 2 },
+      { "number": 3, "clue": "Makes attempts (5)", "answer": "TRIES", "startRow": 0, "startCol": 3 },
+      { "number": 4, "clue": "Creative subjects such as painting or music (4)", "answer": "ARTS", "startRow": 1, "startCol": 0 },
+      { "number": 5, "clue": "Amount of medicine (4)", "answer": "DOSE", "startRow": 1, "startCol": 4 }
+    ]
+  }
 }
+
   ]
 }
