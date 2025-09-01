@@ -102,7 +102,7 @@ html::-webkit-scrollbar {
 
 .main-content {
     flex: 1;
-    padding: 20px 16px 60px 16px;
+    padding: 20px 16px 120px 16px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -366,41 +366,6 @@ html::-webkit-scrollbar {
     background-color: var(--ios-border);
 }
 
-.navigation-controls {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    margin-top: 16px;
-}
-
-.btn-navigation {
-    flex: none;
-    padding: 18px 32px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
-    background-color: var(--ios-blue);
-    color: white;
-    box-shadow: var(--shadow);
-    min-width: 160px;
-}
-
-.btn-navigation:active {
-    transform: scale(0.95);
-}
-
-.btn-navigation:hover {
-    background-color: #0056CC;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
-}
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }

@@ -140,7 +140,6 @@ class CrosswordGame {
         this.gridContainer = document.getElementById('grid-container');
         this.cluesAcross = document.getElementById('clues-across');
         this.cluesDown = document.getElementById('clues-down');
-        this.newGameBtn = document.getElementById('new-game-btn');
         this.checkBtn = document.getElementById('check-btn');
         this.revealBtn = document.getElementById('reveal-btn');
         this.allPuzzlesBtn = document.getElementById('all-puzzles-btn');
@@ -192,22 +191,15 @@ class CrosswordGame {
     loadDailyPuzzle() {
         if (this.puzzles.length === 0) return;
         
-        // Start date: August 31, 2025
-        const startDate = new Date(2025, 7, 31); // Month is 0-indexed, so 7 = August
-        const today = new Date();
+        // Default to the latest puzzle (highest ID)
+        const latestPuzzle = this.puzzles.reduce((latest, current) => 
+            current.id > latest.id ? current : latest
+        );
         
-        // Calculate days since start date
-        const timeDifference = today.getTime() - startDate.getTime();
-        const daysSinceStart = Math.floor(timeDifference / (1000 * 3600 * 24));
+        // Find the index of the latest puzzle
+        const selectedIndex = this.puzzles.findIndex(puzzle => puzzle.id === latestPuzzle.id);
         
-        // Calculate puzzle ID (days since start + 1, cycle through available puzzles)
-        const puzzleId = (daysSinceStart % this.puzzles.length) + 1;
-        
-        // Find puzzle with matching ID, or fallback to first puzzle
-        const puzzleIndex = this.puzzles.findIndex(puzzle => puzzle.id === puzzleId);
-        const selectedIndex = puzzleIndex >= 0 ? puzzleIndex : 0;
-        
-        this.currentPuzzleIndex = selectedIndex;
+        this.currentPuzzleIndex = selectedIndex >= 0 ? selectedIndex : 0;
         this.currentPuzzle = this.puzzles[this.currentPuzzleIndex];
         this.renderGrid();
         this.renderClues();
@@ -219,7 +211,6 @@ class CrosswordGame {
     }
     
     setupEventListeners() {
-        this.newGameBtn.addEventListener('click', () => this.loadRandomPuzzle());
         this.checkBtn.addEventListener('click', () => this.checkAnswers());
         this.revealBtn.addEventListener('click', () => this.revealAnswers());
         this.allPuzzlesBtn.addEventListener('click', () => this.showPuzzleList());
@@ -1097,19 +1088,12 @@ class CrosswordGame {
     isCurrentPuzzleToday() {
         if (!this.currentPuzzle) return false;
         
-        // Start date: August 31, 2025
-        const startDate = new Date(2025, 7, 31); // Month is 0-indexed, so 7 = August
-        const today = new Date();
+        // Check if current puzzle is the latest puzzle (highest ID)
+        const latestPuzzle = this.puzzles.reduce((latest, current) => 
+            current.id > latest.id ? current : latest
+        );
         
-        // Calculate days since start date
-        const timeDifference = today.getTime() - startDate.getTime();
-        const daysSinceStart = Math.floor(timeDifference / (1000 * 3600 * 24));
-        
-        // Calculate what today's puzzle ID should be
-        const todaysPuzzleId = (daysSinceStart % this.puzzles.length) + 1;
-        
-        // Check if current puzzle matches today's puzzle
-        return this.currentPuzzle.id === todaysPuzzleId;
+        return this.currentPuzzle.id === latestPuzzle.id;
     }
     
     async registerServiceWorker() {

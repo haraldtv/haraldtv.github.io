@@ -185,6 +185,92 @@
 }
 ]
 }
+},
+{
+"id": 6,
+"grid": [
+["T", "R", "I", "A", "L"],
+["R", "A", "D", "I", "O"],
+["I", "T", "E", "M", "S"],
+["P", "E", "A", "S", ""],
+["S", "S", "L", "", ""]
+],
+"clues": {
+"across": [
+{
+"number": 1,
+"clue": "Court case or a test run",
+"answer": "TRIAL",
+"startRow": 0,
+"startCol": 0
+},
+{
+"number": 6,
+"clue": "Wireless broadcast medium",
+"answer": "RADIO",
+"startRow": 1,
+"startCol": 0
+},
+{
+"number": 7,
+"clue": "Objects; individual entries",
+"answer": "ITEMS",
+"startRow": 2,
+"startCol": 0
+},
+{
+"number": 8,
+"clue": "Small green legumes",
+"answer": "PEAS",
+"startRow": 3,
+"startCol": 0
+},
+{
+"number": 9,
+"clue": "What keeps you safe online",
+"answer": "SSL",
+"startRow": 4,
+"startCol": 0
+}
+],
+"down": [
+{
+"number": 1,
+"clue": "Journeys (or stumbles)",
+"answer": "TRIPS",
+"startRow": 0,
+"startCol": 0
+},
+{
+"number": 2,
+"clue": "Prices or evaluations",
+"answer": "RATES",
+"startRow": 0,
+"startCol": 1
+},
+{
+"number": 3,
+"clue": "Perfect; model",
+"answer": "IDEAL",
+"startRow": 0,
+"startCol": 2
+},
+{
+"number": 4,
+"clue": "Targets; intends",
+"answer": "AIMS",
+"startRow": 0,
+"startCol": 3
+},
+{
+"number": 5,
+"clue": "Spanish definite article (plural, masculine)",
+"answer": "LOS",
+"startRow": 0,
+"startCol": 4
+}
+]
+}
 }
   ]
 }
