@@ -192,12 +192,10 @@ class CrosswordGame {
         if (this.puzzles.length === 0) return;
         
         const today = new Date();
-        const todayDateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
-        
-        // Debug: Check local vs UTC date
-        console.log('Local date:', today.toString());
-        console.log('UTC ISO string:', today.toISOString());
-        console.log('Local date string we use:', todayDateString);
+        // Use local date instead of UTC to match banner display
+        const todayDateString = today.getFullYear() + '-' + 
+            String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+            String(today.getDate()).padStart(2, '0');
         
         // First, try to find a puzzle with today's exact date
         let selectedPuzzle = this.puzzles.find(puzzle => puzzle.date === todayDateString);
@@ -1127,7 +1125,10 @@ class CrosswordGame {
         if (!this.currentPuzzle) return false;
         
         const today = new Date();
-        const todayDateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        // Use local date instead of UTC to match banner display
+        const todayDateString = today.getFullYear() + '-' + 
+            String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+            String(today.getDate()).padStart(2, '0');
         
         // First check: is current puzzle's date exactly today?
         if (this.currentPuzzle.date === todayDateString) {
