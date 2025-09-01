@@ -291,10 +291,10 @@
   "clues": {
     "across": [
       { "number": 1, "clue": "Keyboard key used in many shortcuts (3)", "answer": "ALT", "startRow": 0, "startCol": 1 },
-      { "number": 2, "clue": "Prize given for achievement (5)", "answer": "AWARD", "startRow": 1, "startCol": 0 },
-      { "number": 3, "clue": "Wireless broadcast medium (5)", "answer": "RADIO", "startRow": 2, "startCol": 0 },
-      { "number": 4, "clue": "Tall plants with trunks (5)", "answer": "TREES", "startRow": 3, "startCol": 0 },
-      { "number": 5, "clue": "Perception or feeling (5)", "answer": "SENSE", "startRow": 4, "startCol": 0 }
+      { "number": 4, "clue": "Prize given for achievement (5)", "answer": "AWARD", "startRow": 1, "startCol": 0 },
+      { "number": 6, "clue": "Wireless broadcast medium (5)", "answer": "RADIO", "startRow": 2, "startCol": 0 },
+      { "number": 7, "clue": "Tall plants with trunks (5)", "answer": "TREES", "startRow": 3, "startCol": 0 },
+      { "number": 8, "clue": "Perception or feeling (5)", "answer": "SENSE", "startRow": 4, "startCol": 0 }
     ],
     "down": [
       { "number": 1, "clue": "Conscious of; informed (5)", "answer": "AWARE", "startRow": 0, "startCol": 1 },
