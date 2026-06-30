@@ -1,0 +1,1 @@
+{"name":"Exercise Tracker","short_name":"ExTrack","description":"Track your workout progress, sets, and reps","start_url":"/","display":"standalone","background_color":"#09090b","theme_color":"#09090b","lang":"en","scope":"./","orientation":"portrait-primary","icons":[{"src":"favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}

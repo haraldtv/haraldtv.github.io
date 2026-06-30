@@ -1,0 +1,162 @@
+[
+  {
+    "id": "barbell-bench-press",
+    "name": "Barbell Bench Press",
+    "category": "Compound",
+    "muscleGroups": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Barbell", "Bench"],
+    "description": "A foundational horizontal pushing movement targeting the chest."
+  },
+  {
+    "id": "incline-dumbbell-press",
+    "name": "Incline Dumbbell Press",
+    "category": "Compound",
+    "muscleGroups": ["Upper Chest", "Triceps", "Shoulders"],
+    "equipment": ["Dumbbells", "Incline Bench"],
+    "description": "Targets the upper chest with a steeper angle of push."
+  },
+  {
+    "id": "cable-fly",
+    "name": "Cable Fly",
+    "category": "Isolation",
+    "muscleGroups": ["Chest"],
+    "equipment": ["Cable Machine"],
+    "description": "Isolation fly movement for chest stretch and contraction."
+  },
+  {
+    "id": "barbell-squat",
+    "name": "Barbell Squat",
+    "category": "Compound",
+    "muscleGroups": ["Quads", "Glutes", "Hamstrings", "Core"],
+    "equipment": ["Barbell", "Squat Rack"],
+    "description": "King of leg exercises. Full lower body compound movement."
+  },
+  {
+    "id": "romanian-deadlift",
+    "name": "Romanian Deadlift",
+    "category": "Compound",
+    "muscleGroups": ["Hamstrings", "Glutes", "Lower Back"],
+    "equipment": ["Barbell"],
+    "description": "Hip hinge movement emphasising hamstrings and glutes."
+  },
+  {
+    "id": "leg-press",
+    "name": "Leg Press",
+    "category": "Compound",
+    "muscleGroups": ["Quads", "Glutes", "Hamstrings"],
+    "equipment": ["Leg Press Machine"],
+    "description": "Machine-based lower body pressing movement."
+  },
+  {
+    "id": "leg-curl",
+    "name": "Seated Leg Curl",
+    "category": "Isolation",
+    "muscleGroups": ["Hamstrings"],
+    "equipment": ["Leg Curl Machine"],
+    "description": "Isolation movement for the hamstrings."
+  },
+  {
+    "id": "barbell-row",
+    "name": "Barbell Row",
+    "category": "Compound",
+    "muscleGroups": ["Back", "Biceps", "Rear Delts"],
+    "equipment": ["Barbell"],
+    "description": "Horizontal pulling movement targeting the back."
+  },
+  {
+    "id": "lat-pulldown",
+    "name": "Lat Pulldown",
+    "category": "Compound",
+    "muscleGroups": ["Lats", "Biceps"],
+    "equipment": ["Cable Machine"],
+    "description": "Vertical pulling movement targeting the latissimus dorsi."
+  },
+  {
+    "id": "cable-row",
+    "name": "Seated Cable Row",
+    "category": "Compound",
+    "muscleGroups": ["Back", "Biceps"],
+    "equipment": ["Cable Machine"],
+    "description": "Horizontal cable pulling movement for mid-back development."
+  },
+  {
+    "id": "face-pull",
+    "name": "Face Pull",
+    "category": "Isolation",
+    "muscleGroups": ["Rear Delts", "External Rotators", "Traps"],
+    "equipment": ["Cable Machine"],
+    "description": "Rear delt and rotator cuff exercise for shoulder health."
+  },
+  {
+    "id": "overhead-press",
+    "name": "Overhead Press",
+    "category": "Compound",
+    "muscleGroups": ["Shoulders", "Triceps", "Traps"],
+    "equipment": ["Barbell"],
+    "description": "Vertical pressing movement for shoulder development."
+  },
+  {
+    "id": "lateral-raise",
+    "name": "Lateral Raise",
+    "category": "Isolation",
+    "muscleGroups": ["Side Delts"],
+    "equipment": ["Dumbbells"],
+    "description": "Isolation movement for medial deltoid width."
+  },
+  {
+    "id": "barbell-curl",
+    "name": "Barbell Curl",
+    "category": "Isolation",
+    "muscleGroups": ["Biceps"],
+    "equipment": ["Barbell"],
+    "description": "Standard bicep curl with a barbell."
+  },
+  {
+    "id": "hammer-curl",
+    "name": "Hammer Curl",
+    "category": "Isolation",
+    "muscleGroups": ["Biceps", "Brachialis"],
+    "equipment": ["Dumbbells"],
+    "description": "Neutral grip curl targeting brachialis and brachioradialis."
+  },
+  {
+    "id": "tricep-pushdown",
+    "name": "Tricep Pushdown",
+    "category": "Isolation",
+    "muscleGroups": ["Triceps"],
+    "equipment": ["Cable Machine"],
+    "description": "Cable-based isolation movement for triceps."
+  },
+  {
+    "id": "overhead-tricep-extension",
+    "name": "Overhead Tricep Extension",
+    "category": "Isolation",
+    "muscleGroups": ["Triceps"],
+    "equipment": ["Dumbbell", "Cable Machine"],
+    "description": "Tricep exercise emphasising the long head."
+  },
+  {
+    "id": "deadlift",
+    "name": "Deadlift",
+    "category": "Compound",
+    "muscleGroups": ["Back", "Glutes", "Hamstrings", "Traps"],
+    "equipment": ["Barbell"],
+    "description": "Total-body pulling movement. One of the main strength lifts."
+  },
+  {
+    "id": "plank",
+    "name": "Plank",
+    "category": "Core",
+    "muscleGroups": ["Core", "Abs"],
+    "equipment": ["Bodyweight"],
+    "description": "Isometric core stability hold."
+  },
+  {
+    "id": "calf-raise",
+    "name": "Standing Calf Raise",
+    "category": "Isolation",
+    "muscleGroups": ["Calves"],
+    "equipment": ["Machine", "Bodyweight"],
+    "description": "Isolation movement for the gastrocnemius."
+  }
+]
